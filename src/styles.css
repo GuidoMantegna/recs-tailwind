@@ -1,0 +1,39 @@
+* {
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+#root {
+  height: 100vh;
+}
+
+.custom-btn {
+  border: 2px solid #000;
+  border-bottom: 4px solid #000;
+  border-right: 4px solid #000;
+  width: 150px;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: all .25s;
+}
+
+.custom-btn::after {
+  content: '';
+  display: block;
+  width: 25%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  transform: skewX(-25deg) translateX(-60px);
+  transition: all .5s ease-in-out;
+}
+
+.custom-btn:hover::after {
+  transform: skewX(-25deg) translateX(150px);
+}
+
+.custom-btn:hover {
+  font-weight: bold;
+}

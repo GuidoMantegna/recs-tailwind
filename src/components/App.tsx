@@ -1,6 +1,4 @@
-import Avatar from 'components/Avatar'
 import logo from 'assets/logo.svg'
-import Layout from 'components/Layout/Layout'
 import Landing from 'routes/Landing'
 
 const randoms = [

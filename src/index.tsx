@@ -8,6 +8,7 @@ import React from 'react'
 import Landing from 'routes/Landing'
 import ErrorPage from 'errorPage'
 import Login from 'routes/Login'
+import Home from 'routes/Home'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/',
+        element: <Home />,
       },
     ],
   },

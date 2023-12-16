@@ -35,7 +35,7 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <Link to="home">
+      <Link to="/">
         <button className="custom-btn">Check it out ⚡</button>
       </Link>
     </div>

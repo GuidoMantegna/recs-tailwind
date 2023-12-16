@@ -7,21 +7,22 @@ import Layout from 'routes/Layout'
 import React from 'react'
 import Landing from 'routes/Landing'
 import ErrorPage from 'errorPage'
+import Login from 'routes/Login'
 
 const router = createBrowserRouter([
   {
-    path: '/home',
+    path: '/',
     element: <Layout />,
     errorElement: <ErrorPage />,
-    // children: [
-    //   {
-    //     path: '/',
-    //     element: <App />,
-    //   },
-    // ],
+    children: [
+      {
+        path: '/login',
+        element: <Login />,
+      },
+    ],
   },
   {
-    path: '/',
+    path: '/home',
     element: <Landing />,
   }
 ])

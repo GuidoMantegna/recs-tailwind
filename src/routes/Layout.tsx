@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import Header from 'components/Header/Header'
 import Navbar from 'components/Navbar'
 
@@ -9,7 +10,9 @@ const Layout: React.FC<LayoutProps> = () => {
   return (
     <div className="h-full">
       <Header />
-      <p>Layout</p>
+      <div className="flex flex-col items-center p-10">
+        <Outlet />
+      </div>
       <Navbar />
     </div>
   )

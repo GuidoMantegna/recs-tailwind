@@ -10,7 +10,7 @@ const Layout: React.FC<LayoutProps> = () => {
   return (
     <div className="h-full">
       <Header />
-      <div className="flex flex-col items-center p-10">
+      <div className="flex flex-col items-center p-10 pb-20">
         <Outlet />
       </div>
       <Navbar />

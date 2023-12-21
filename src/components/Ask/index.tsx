@@ -25,10 +25,16 @@ interface AskProps {
     }
   ]
   numLikes: number
-  
+  createdAt: string
 }
 
-const Ask: React.FC<AskProps> = ({user, brief, replies}) => {
+const Ask: React.FC<AskProps> = ({ user, brief, replies, createdAt }) => {
+  const date = new Date(createdAt)
+  const formattedDate = date.toLocaleDateString('en-US', {
+    month: 'short',
+    year: 'numeric'
+  }).toLocaleUpperCase()
+
   return (
     <div className="w-full my-8">
       <div className="flex items-center gap-2">
@@ -38,16 +44,16 @@ const Ask: React.FC<AskProps> = ({user, brief, replies}) => {
           className="rounded-full w-10"
         />
         <p className="">{user.name}</p>
-        <span className="font-extralight text-sm">JUN 2020</span>
+        <span className="font-extralight text-sm">{formattedDate}</span>
       </div>
-      <div className="border p-2 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2" >
-          {brief}
+      <div className="border p-2 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2">
+        {brief}
       </div>
-      <div className='flex justify-end items-center gap-2'>
+      <div className="flex justify-end items-center gap-2">
         <button>
-        <GoCommentDiscussion size={20} />
+          <GoCommentDiscussion size={20} />
         </button>
-          <p className="text-sm">Replies {`${replies.length}`}</p>
+        <p className="text-sm">Replies {`${replies.length}`}</p>
       </div>
     </div>
   )

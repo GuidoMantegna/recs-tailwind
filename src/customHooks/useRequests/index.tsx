@@ -25,7 +25,8 @@ interface AskProps {
       name: string
     }
   ]
-  numLikes: number
+  numLikes: number,
+  createdAt: string,
   
 }
 

@@ -9,6 +9,7 @@ import Landing from 'routes/Landing'
 import ErrorPage from 'errorPage'
 import Login from 'routes/Login'
 import Home from 'routes/Home'
+import { Provider } from 'context'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,8 @@ const root = createRoot(container)
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 )

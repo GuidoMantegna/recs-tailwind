@@ -1,21 +1,58 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import axios from 'axios'
 import { BiShowAlt, BiHide } from 'react-icons/bi'
+import { useLogin, AuthContext} from 'context'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 type Form = {
   email: string
   password: string
+  name: string
+  consfirmPassword: string
 }
 
 const Login: React.FC = () => {
-  const [form, setForm] = useState({ email: '', password: '' })
+  const [form, setForm] = useState<Form>({
+    email: '',
+    password: '',
+    name: '',
+    consfirmPassword: ''
+  })
   const [showPassword, toggle] = useState(false)
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: name !== 'name' ? value.trim() : value })
   }
 
+  const login = useLogin()
+
+  const navigate = useNavigate()
+
+  const loginRequest = async () => {
+    try {
+      const {
+        data: {
+          data: { user }
+        }
+      } = await axios.post('http://localhost:1234/api/v1/users/login', form)
+      login({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      })
+      toast.success('Login successful')
+      navigate('/')
+    } catch (error: Error | any) {
+      toast.error(error.response.data.message)
+    }
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    loginRequest()
   }
 
   return (
@@ -27,6 +64,7 @@ const Login: React.FC = () => {
           onChange={handleFormChange}
           type="text"
           id="name"
+          value={form.name}
           className="border-b-2 border-black px-2 py-1"
         />
       </div>
@@ -37,6 +75,7 @@ const Login: React.FC = () => {
           onChange={handleFormChange}
           type="email"
           id="email"
+          value={form.email}
           className="border-b-2 border-black px-2 py-1"
         />
       </div>
@@ -52,6 +91,7 @@ const Login: React.FC = () => {
             onChange={handleFormChange}
             type={showPassword ? 'text' : 'password'}
             id="password"
+            value={form.password}
             className="border-b-2 border-black px-2 py-1 w-full"
           />
           <button
@@ -63,16 +103,15 @@ const Login: React.FC = () => {
         </span>
       </div>
       <div id="form-field" className="flex flex-col mb-6">
-        <label htmlFor="confirmPassword">
-          Confirm password
-        </label>
-          <input
-            name="confirmPassword"
-            onChange={handleFormChange}
-            type={showPassword ? 'text' : 'password'}
-            id="confirmPassword"
-            className="border-b-2 border-black px-2 py-1 w-full"
-          />
+        <label htmlFor="confirmPassword">Confirm password</label>
+        <input
+          name="confirmPassword"
+          onChange={handleFormChange}
+          type={showPassword ? 'text' : 'password'}
+          id="confirmPassword"
+          value={form.consfirmPassword}
+          className="border-b-2 border-black px-2 py-1 w-full"
+        />
       </div>
       <button className="custom-btn w-full" type="submit">
         Login

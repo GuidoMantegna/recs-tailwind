@@ -1,6 +1,23 @@
+import React, { useState } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+
 const AskForm: React.FC = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [ask, setAsk] = useState('')
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setAsk(e.target.value)
+  }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    try {
+      axios.post(
+        'http://localhost:1234/api/v1/requests',
+        { brief: ask },
+      )
+    } catch (error: Error | any) {
+      toast.error(error.response.data.message)
+    }
   }
   return (
     <form onSubmit={handleSubmit} className="w-full">
@@ -15,7 +32,7 @@ const AskForm: React.FC = () => {
         </label>
         <textarea
           name="name"
-          // onChange={handleFormChange}
+          onChange={handleFormChange}
           placeholder="I feel bored, I want to watch something funny..."
           id="name"
           className="border-b-2 border-black px-2 py-2"

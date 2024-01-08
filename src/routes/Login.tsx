@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import { BiShowAlt, BiHide } from 'react-icons/bi'
-import { useTest } from 'context'
+import { useLogin, AuthContext} from 'context'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 type Form = {
   email: string
@@ -23,25 +26,33 @@ const Login: React.FC = () => {
     setForm({ ...form, [name]: name !== 'name' ? value.trim() : value })
   }
 
-  const login = useTest()
+  const login = useLogin()
+
+  const navigate = useNavigate()
 
   const loginRequest = async () => {
     try {
-      const { data } = await axios.post(
-        'http://localhost:1234/api/v1/users/login',
-        form
-      )
-      console.log(data)
-      login(data.data.user)
-    } catch (error) {
-      console.log(error)
+      const {
+        data: {
+          data: { user }
+        }
+      } = await axios.post('http://localhost:1234/api/v1/users/login', form)
+      login({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      })
+      toast.success('Login successful')
+      navigate('/')
+    } catch (error: Error | any) {
+      toast.error(error.response.data.message)
     }
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     loginRequest()
-
   }
 
   return (

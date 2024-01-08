@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import { BiShowAlt, BiHide } from 'react-icons/bi'
-import { useLogin, AuthContext} from 'context'
+import { useLogin, AuthContext } from 'context'
 import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 type Form = {
@@ -97,6 +97,7 @@ const Login: React.FC = () => {
           <button
             className=" absolute top-2 right-2"
             onClick={() => toggle(!showPassword)}
+            type="button"
           >
             {showPassword ? <BiShowAlt /> : <BiHide />}
           </button>

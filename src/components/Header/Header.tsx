@@ -2,12 +2,14 @@ import { useContext } from 'react'
 import { AuthContext, Login } from 'context'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const Header = () => {
   const user = useContext(AuthContext)
   const login = useContext(Login)
-  const loginLogout = () => {
+  const loginLogout = async () => {
     if (user) {
+      axios.get('http://localhost:1234/api/v1/users/logout')
       login(null)
       toast.info('Logout successful')
     }

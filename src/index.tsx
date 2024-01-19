@@ -9,6 +9,7 @@ import Landing from 'routes/Landing'
 import ErrorPage from 'errorPage'
 import Login from 'routes/Login'
 import Home from 'routes/Home'
+import Request from 'routes/Request'
 import { Provider } from 'context'
 
 const router = createBrowserRouter([
@@ -18,19 +19,23 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/login',
+        path: 'login',
         element: <Login />,
       },
       {
         path: '/',
         element: <Home />,
       },
+      {
+        path: 'requests/:id',
+        element: <Request />,
+      }
     ],
   },
-  {
-    path: '/home',
-    element: <Landing />,
-  }
+  // {
+  //   path: '/home',
+  //   element: <Landing />,
+  // }
 ])
 
 const container = document.getElementById('root') as HTMLDivElement

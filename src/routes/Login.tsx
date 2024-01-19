@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+// Allow cookies to be received from the server and seted in the browser
+axios.defaults.withCredentials = true
+
 type Form = {
   email: string
   password: string

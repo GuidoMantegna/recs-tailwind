@@ -27,3 +27,13 @@ export interface AskProps {
   numLikes: number
   createdAt: string
 }
+
+export type ReplyProps = {
+  _id: string
+  reply: string
+  videoURL: string
+  user: { _id: string; name: string }
+  request: string
+  likes: [{ _id: string; name: string }]
+  numLikes: number
+}

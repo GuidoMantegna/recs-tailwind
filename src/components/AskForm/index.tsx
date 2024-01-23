@@ -1,24 +1,19 @@
 import React, { useState } from 'react'
-import axios from 'axios'
-import { toast } from 'react-toastify'
 
-const AskForm: React.FC = () => {
+interface AskFormProps {
+  makeRequest: (ask: string) => void
+}
+
+const AskForm: React.FC<AskFormProps> = ({ makeRequest }) => {
   const [ask, setAsk] = useState('')
-
   const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setAsk(e.target.value)
   }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    try {
-      axios.post(
-        'http://localhost:1234/api/v1/requests',
-        { brief: ask },
-      )
-    } catch (error: Error | any) {
-      toast.error(error.response.data.message)
-    }
+    makeRequest(ask)
   }
+
   return (
     <form onSubmit={handleSubmit} className="w-full">
       <div id="form-field" className="flex flex-col mb-6">

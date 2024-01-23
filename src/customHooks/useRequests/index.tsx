@@ -86,7 +86,8 @@ const useRequests = (id: string | undefined) => {
   return {
     asks,
     loading,
-    error
+    error,
+    setAsks
   }
 }
 

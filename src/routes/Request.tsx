@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import AskForm from 'components/AskForm'
 import Ask from 'components/Ask'
+import ReplyForm from 'components/ReplyForm'
 import Modal from 'components/Modal'
 import useRequests from '../customHooks/useRequests'
 import {
@@ -40,7 +41,7 @@ const Request: React.FC = () => {
       ) : (
         <>
           <Modal onClose={() => setIsModalOpen(!isModalOpen)} isOpen={isModalOpen}>
-            <p>Holiiss</p>
+            <ReplyForm onSubmit={(form) => console.log(form)} closeModal={() => setIsModalOpen(!isModalOpen)}/>
           </Modal>
           <div className="w-full mb-6">
             <div className="flex items-center gap-2">

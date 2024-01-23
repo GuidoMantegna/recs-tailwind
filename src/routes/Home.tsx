@@ -4,17 +4,25 @@ import AskForm from 'components/AskForm'
 import Ask from 'components/Ask'
 import useRequests from 'customHooks/useRequests'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Home: React.FC = () => {
   const user = useContext(AuthContext)
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const { asks, loading, error, setAsks } = useRequests(undefined)
+  const makeRequest = (ask: string) => {
+    try {
+      axios
+        .post('http://localhost:1234/api/v1/requests', { brief: ask })
+        .then((data) => asks && setAsks([...asks, data.data.data.request]))
+    } catch (error: Error | any) {
+      toast.error(error.response.data.message)
+    }
   }
-  const { asks, loading, error } = useRequests(undefined)
   return (
     <>
       {user ? (
-        <AskForm />
+        <AskForm makeRequest={makeRequest} />
       ) : (
         <Link to="/login" className="custom-btn">
           Login to start asking for recomendations
@@ -24,31 +32,9 @@ const Home: React.FC = () => {
         <p>Loading...</p>
       ) : (
         <div className="w-full">
-          {/* {asks[0].replies.map((ask) => (
-            <div className="w-full my-8">
-            <div className="flex items-center gap-2">
-              <img
-                src="/img/users/user-7.jpg"
-                alt="user photo"
-                className="rounded-full w-10"
-              />
-              <p className="">USER</p>
-              {/* <span className="font-extralight text-sm">{formattedDate}</span> 
-            </div>
-            <div className="border p-2 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2">
-              {ask.reply}
-            </div>
-            <div className="flex justify-end items-center gap-2">
-            </div>
-          </div>
-          ))} */}
-          {asks?.map((ask) => (
-            <Ask key={ask._id} {...ask} />
-          ))}
+          {asks?.map((ask) => <Ask key={ask._id} {...ask} />)}
         </div>
       )}
-      {/* <Ask />
-      <Ask /> */}
     </>
   )
 }

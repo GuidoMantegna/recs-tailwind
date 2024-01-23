@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react'
+import { createContext, useState, useContext, useEffect } from 'react'
 import { AskProps } from 'interfaces'
 
 interface AuthContextProps {
@@ -20,8 +20,17 @@ export const useLogin = () => useContext(Login)
 export const useAsks = () => useContext(AsksContext)
 
 export const Provider: React.FC<ProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<AuthContextProps | null>(null)
+  // const [user, setUser] = useState<AuthContextProps | null>(null)
+  const [user, setUser] = useState<AuthContextProps | null>(() => {
+    const user = localStorage.getItem('user')
+    return user ? JSON.parse(user) : null
+  })
   const [asks, setAsks] = useState<AskProps | null>(null)
+
+  useEffect(() => {
+    // Update local storage whenever data changes
+    localStorage.setItem('user', JSON.stringify(user))
+  })
 
   const login = (user: AuthContextProps | null) => {
     setUser(user)

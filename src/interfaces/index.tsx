@@ -15,6 +15,8 @@ export interface AskProps {
       request: string
       likes: [{ _id: string; name: string }]
       numLikes: number
+      availableOn: string
+      createdAt: string
     }
   ]
   // an array of objects with the reply data
@@ -35,5 +37,14 @@ export type ReplyProps = {
   user: { _id: string; name: string }
   request: string
   likes: [{ _id: string; name: string }]
-  numLikes: number
+  numLikes: number,
+  availableOn: string,
+  createdAt: string,
+  loggedUserId: string | undefined // tells us if the user has liked the reply or not (Not in the API)
+}
+
+export type ReplyFormState = {
+  reply: string
+  videoURL: string
+  availableOn: string
 }

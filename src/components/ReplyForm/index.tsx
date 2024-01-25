@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
+import { ReplyProps, ReplyFormState } from 'interfaces'
+
 
 interface ReplyFormProps {
   onSubmit: (form: ReplyFormState) => void
   closeModal: () => void
 }
 
-type ReplyFormState = {
-  rec: string
-  videoURL: string
-  availableOn: string
-}
-
 const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
   const [reply, setReply] = useState<ReplyFormState>({
-    rec: '',
+    reply: '',
     videoURL: '',
     availableOn: ''
   })
@@ -32,8 +28,8 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <textarea
-        name="rec"
-        value={reply.rec}
+        name="reply"
+        value={reply.reply}
         className="border-b-2 border-black px-2 py-1"
         onChange={handleFormChange}
         placeholder="You should see..."

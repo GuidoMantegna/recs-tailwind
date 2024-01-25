@@ -42,3 +42,9 @@ export type ReplyProps = {
   createdAt: string,
   isLiked: boolean | undefined // tells us if the user has liked the reply or not (Not in the API)
 }
+
+export type ReplyFormState = {
+  reply: string
+  videoURL: string
+  availableOn: string
+}

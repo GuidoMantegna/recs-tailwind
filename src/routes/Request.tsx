@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
 import ReplyForm from 'components/ReplyForm'
 import Modal from 'components/Modal'
 import useRequests from '../customHooks/useRequests'
@@ -8,6 +9,7 @@ import { getFormattedDate } from 'utils'
 import { useContext } from 'react'
 import { AuthContext } from 'context'
 import Reply from 'components/Reply'
+import { ReplyFormState } from 'interfaces'
 
 const Request: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -17,6 +19,16 @@ const Request: React.FC = () => {
   const isLiked = asks?.[0].replies[0].likes.some(
     (like) => like._id === user?._id
   )
+  const handleReplySubmit = async (form: ReplyFormState) => {
+    console.log(form)
+    try {
+      await axios.post(`http://localhost:1234/api/v1/requests/${asks?.[0]._id}/replies`, {
+        ...form,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <>
       {loading || !asks ? (
@@ -28,7 +40,7 @@ const Request: React.FC = () => {
             isOpen={isModalOpen}
           >
             <ReplyForm
-              onSubmit={(form) => console.log(form)}
+              onSubmit={handleReplySubmit}
               closeModal={() => setIsModalOpen(!isModalOpen)}
             />
           </Modal>

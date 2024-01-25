@@ -16,15 +16,19 @@ const Request: React.FC = () => {
   const { asks, loading, error } = useRequests(id)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const user = useContext(AuthContext)
-  const isLiked = asks?.[0].replies[0].likes.some(
-    (like) => like._id === user?._id
-  )
+  // const isLiked = (currentLikeID) => asks?.[0].replies[0].likes.some(
+  //   (like) => like._id === user?._id
+  // )
   const handleReplySubmit = async (form: ReplyFormState) => {
     console.log(form)
     try {
-      await axios.post(`http://localhost:1234/api/v1/requests/${asks?.[0]._id}/replies`, {
-        ...form,
-      })
+      await axios.post(
+        `http://localhost:1234/api/v1/requests/${asks?.[0]._id}/replies`,
+        {
+          ...form
+        }
+      )
+      setIsModalOpen(!isModalOpen)
     } catch (error) {
       console.log(error)
     }
@@ -75,7 +79,7 @@ const Request: React.FC = () => {
             </div>
           </div>
           {asks[0].replies.map((reply) => (
-            <Reply {...reply} isLiked={isLiked} key={reply._id} />
+            <Reply {...reply} loggedUserId={user?._id} key={reply._id} />
           ))}
         </>
       )}

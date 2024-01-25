@@ -40,7 +40,7 @@ export type ReplyProps = {
   numLikes: number,
   availableOn: string,
   createdAt: string,
-  isLiked: boolean | undefined // tells us if the user has liked the reply or not (Not in the API)
+  loggedUserId: string | undefined // tells us if the user has liked the reply or not (Not in the API)
 }
 
 export type ReplyFormState = {

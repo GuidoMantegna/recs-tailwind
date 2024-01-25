@@ -12,7 +12,8 @@ const Reply: React.FC<ReplyProps> = ({
   createdAt,
   reply,
   numLikes,
-  isLiked
+  likes,
+  loggedUserId
 }) => {
   const handleLike = async (replyID: string) => {
     try {
@@ -51,7 +52,11 @@ const Reply: React.FC<ReplyProps> = ({
       <div></div>
       <div className="flex justify-end items-center gap-2 text-sm pr-4">
         <button className="flex gap-1" onClick={() => handleLike(_id)}>
-          {isLiked ? <GoHeartFill size={20} /> : <GoHeart size={20} />}
+          {likes.length && likes.some((like) => like._id === loggedUserId) ? (
+            <GoHeartFill size={20} />
+          ) : (
+            <GoHeart size={20} />
+          )}
           {numLikes}
         </button>
       </div>

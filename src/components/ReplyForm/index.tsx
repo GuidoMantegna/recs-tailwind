@@ -8,14 +8,18 @@ interface ReplyFormProps {
 type ReplyFormState = {
   rec: string
   videoURL: string
+  availableOn: string
 }
 
 const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
   const [reply, setReply] = useState<ReplyFormState>({
     rec: '',
-    videoURL: ''
+    videoURL: '',
+    availableOn: ''
   })
-  const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     const { name, value } = e.target
 
     setReply({ ...reply, [name]: value })
@@ -26,7 +30,7 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
     // setReply('')
   }
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <textarea
         name="rec"
         value={reply.rec}
@@ -41,20 +45,24 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
         onChange={handleFormChange}
         placeholder="YouTube Link"
       />
-      <div className='flex flex-col gap-1'>
-      <button
-        type="submit"
-        className="custom-btn mt-4 grow"
-      >
-        Reply
-      </button>
-      <button
-        type="button"
-        className="custom-btn mt-4 grow bg-slate-200"
-        onClick={closeModal}
-      >
-        Cancel
-      </button>
+      <input
+        name="availableOn"
+        value={reply.availableOn}
+        className="border-b-2 border-black px-2 py-1"
+        onChange={handleFormChange}
+        placeholder="Available on..."
+      />
+      <div className="flex flex-col gap-1 mt-4">
+        <button type="submit" className="custom-btn mt-4 grow">
+          Reply
+        </button>
+        <button
+          type="button"
+          className="custom-btn mt-4 grow bg-slate-200"
+          onClick={closeModal}
+        >
+          Cancel
+        </button>
       </div>
     </form>
   )

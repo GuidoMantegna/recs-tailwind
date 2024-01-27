@@ -2,23 +2,29 @@ import React, { useContext } from 'react'
 import { AuthContext } from 'context'
 import AskForm from 'components/AskForm'
 import Ask from 'components/Ask'
-import useRequests from 'customHooks/useRequests'
+import useAsks from 'customHooks/useAsks'
+import { hanlders } from 'customHooks/useHandlers'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const Home: React.FC = () => {
   const user = useContext(AuthContext)
-  const { asks, loading, error, setAsks } = useRequests(undefined)
+  const { asks, loading, error, setAsks } = useAsks(undefined)
+  
+  // const makeRequest = (ask: string) => {
+  //   try {
+  //     axios
+  //       .post('http://localhost:1234/api/v1/requests', { brief: ask })
+  //       .then((data) => asks && setAsks([data.data.data.request, ...asks]))
+  //   } catch (error: Error | any) {
+  //     toast.error(error.response.data.message)
+  //   }
+  // } 
   const makeRequest = (ask: string) => {
-    try {
-      axios
-        .post('http://localhost:1234/api/v1/requests', { brief: ask })
-        .then((data) => asks && setAsks([data.data.data.request, ...asks]))
-    } catch (error: Error | any) {
-      toast.error(error.response.data.message)
-    }
-  }
+    hanlders('requests', 'post', { brief: ask })
+    .then((data) => asks && data && setAsks([data.data.data.request, ...asks]))
+  } 
   return (
     <>
       {user ? (

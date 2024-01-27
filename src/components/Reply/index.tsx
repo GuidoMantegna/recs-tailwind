@@ -13,17 +13,18 @@ const Reply: React.FC<ReplyProps> = ({
   reply,
   numLikes,
   likes,
-  loggedUserId
+  loggedUserId, 
+  handleLike,
 }) => {
-  const handleLike = async (replyID: string) => {
-    try {
-      await axios.patch(`http://localhost:1234/api/v1/replies/${replyID}`, {
-        userID: user?._id
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const handleLike = async (replyID: string) => {
+  //   try {
+  //     await axios.patch(`http://localhost:1234/api/v1/replies/${replyID}`, {
+  //       userID: user?._id
+  //     })
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   return (
     <div className="w-full" key={_id}>
       <div className="flex items-center gap-2">

@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     try {
       axios
         .post('http://localhost:1234/api/v1/requests', { brief: ask })
-        .then((data) => asks && setAsks([...asks, data.data.data.request]))
+        .then((data) => asks && setAsks([data.data.data.request, ...asks]))
     } catch (error: Error | any) {
       toast.error(error.response.data.message)
     }

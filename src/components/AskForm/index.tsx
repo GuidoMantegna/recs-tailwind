@@ -12,6 +12,7 @@ const AskForm: React.FC<AskFormProps> = ({ makeRequest }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     makeRequest(ask)
+    setAsk('')
   }
 
   return (

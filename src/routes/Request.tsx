@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import ReplyForm from 'components/ReplyForm'
 import Modal from 'components/Modal'
-import useRequests from '../customHooks/useRequests'
+import useAsks from '../customHooks/useAsks'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { getFormattedDate } from 'utils'
 import { useContext } from 'react'
@@ -11,14 +11,12 @@ import { AuthContext } from 'context'
 import Reply from 'components/Reply'
 import { ReplyFormState } from 'interfaces'
 
+
 const Request: React.FC = () => {
   const { id } = useParams<{ id: string }>()
-  const { asks, loading, error, setAsks } = useRequests(id)
+  const { asks, loading, error, setAsks } = useAsks(id)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const user = useContext(AuthContext)
-  // const isLiked = (currentLikeID) => asks?.[0].replies[0].likes.some(
-  //   (like) => like._id === user?._id
-  // )
   const handleReplySubmit = async (form: ReplyFormState) => {
     try {
       await axios.post(

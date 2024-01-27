@@ -13,22 +13,41 @@ import { ReplyFormState } from 'interfaces'
 
 const Request: React.FC = () => {
   const { id } = useParams<{ id: string }>()
-  const { asks, loading, error } = useRequests(id)
+  const { asks, loading, error, setAsks } = useRequests(id)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const user = useContext(AuthContext)
   // const isLiked = (currentLikeID) => asks?.[0].replies[0].likes.some(
   //   (like) => like._id === user?._id
   // )
   const handleReplySubmit = async (form: ReplyFormState) => {
-    console.log(form)
     try {
       await axios.post(
         `http://localhost:1234/api/v1/requests/${asks?.[0]._id}/replies`,
         {
           ...form
         }
-      )
+      ).then((data) => {
+        const newAsks = asks ? [...asks] : []
+        newAsks[0].replies.push(data.data.data.reply)
+        setAsks(newAsks)
+      })
       setIsModalOpen(!isModalOpen)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleLike = async (replyID: string) => {
+    try {
+      await axios.patch(`http://localhost:1234/api/v1/replies/${replyID}`, {
+        userID: user?._id
+      }).then((data) => {
+        const newAsks = asks ? [...asks] : []
+        const replyIndex = newAsks[0].replies.findIndex((reply) => reply._id === replyID)
+        newAsks[0].replies[replyIndex] = data.data.data.reply
+        setAsks(newAsks)
+      })
     } catch (error) {
       console.log(error)
     }
@@ -79,7 +98,7 @@ const Request: React.FC = () => {
             </div>
           </div>
           {asks[0].replies.map((reply) => (
-            <Reply {...reply} loggedUserId={user?._id} key={reply._id} />
+            <Reply {...reply} loggedUserId={user?._id} key={reply._id} handleLike={handleLike} />
           ))}
         </>
       )}

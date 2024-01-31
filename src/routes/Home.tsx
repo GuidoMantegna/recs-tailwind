@@ -3,28 +3,30 @@ import { AuthContext } from 'context'
 import AskForm from 'components/AskForm'
 import Ask from 'components/Ask'
 import useAsks from 'customHooks/useAsks'
-import { hanlders } from 'customHooks/useHandlers'
+import { useFetch } from 'customHooks/useFetch'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Error from 'components/Error'
+import Loading from 'components/Loading'
 
 const Home: React.FC = () => {
   const user = useContext(AuthContext)
   const { asks, loading, error, setAsks } = useAsks(undefined)
-  
-  // const makeRequest = (ask: string) => {
-  //   try {
-  //     axios
-  //       .post('http://localhost:1234/api/v1/requests', { brief: ask })
-  //       .then((data) => asks && setAsks([data.data.data.request, ...asks]))
-  //   } catch (error: Error | any) {
-  //     toast.error(error.response.data.message)
-  //   }
-  // } 
+  const { loading: loadingData, error: errorData, fetchData } = useFetch()
+
   const makeRequest = (ask: string) => {
-    hanlders('requests', 'post', { brief: ask })
-    .then((data) => asks && data && setAsks([data.data.data.request, ...asks]))
-  } 
+    fetchData('requests', 'post', { brief: ask }).then(
+      (data) => asks && data && setAsks([data.request, ...asks])
+    )
+  }
+  // const makeRequest = (ask: string) => {
+  //   hanlders('requests', 'post', { brief: ask })
+  //   .then((data) => asks && data && setAsks([data.data.data.request, ...asks]))
+  // }
+
+  if (error || errorData) return <Error />
+  if (loading || loadingData) return <Loading />
   return (
     <>
       {user ? (
@@ -34,13 +36,10 @@ const Home: React.FC = () => {
           Login to start asking for recomendations
         </Link>
       )}
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="w-full">
-          {asks?.map((ask) => <Ask key={ask._id} {...ask} />)}
-        </div>
-      )}
+
+      <div className="w-full">
+        {asks?.map((ask) => <Ask key={ask._id} {...ask} />)}
+      </div>
     </>
   )
 }

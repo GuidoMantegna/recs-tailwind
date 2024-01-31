@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { AskProps } from 'interfaces'
 import { BASE_URL } from 'utils/constants'
-
-// const URL = 'https://recs-api.vercel.app/api/v1'
-// const URL = 'http://localhost:1234/api/v1'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const useAsks = (id: string | undefined) => {
   const [asks, setAsks] = useState<AskProps[] | null>(null)
@@ -16,17 +15,20 @@ const useAsks = (id: string | undefined) => {
     try {
       const {
         data: { data }
-      } = await axios.get(id ? `${BASE_URL}requests/${id}` : `${BASE_URL}/requests`)
+      } = await axios.get(
+        id ? `${BASE_URL}/requests/${id}` : `${BASE_URL}/requests`
+      )
       setAsks(id ? [data.request] : data.requests)
       setLoading(false)
-    } catch (error) {
-      setError(true)
+    } catch (error: any) {
+      console.log(error)
+      toast.error(error.response.data.message)
       setLoading(false)
+      setError(true)
     }
   }
   useEffect(() => {
     fetchAsks()
-    console.log(BASE_URL)
     return () => {}
   }, [])
 

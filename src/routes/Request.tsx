@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import ReplyForm from 'components/ReplyForm'
@@ -10,61 +10,72 @@ import { useContext } from 'react'
 import { AuthContext } from 'context'
 import Reply from 'components/Reply'
 import { ReplyFormState } from 'interfaces'
-
+import { useFetch } from 'customHooks/useFetch'
+import Loading from 'components/Loading'
+import Error from 'components/Error'
 
 const Request: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const { asks, loading, error, setAsks } = useAsks(id)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const user = useContext(AuthContext)
+  const { loading: loadingData, error: errorData, fetchData } = useFetch()
+
   const handleReplySubmit = async (form: ReplyFormState) => {
-    try {
-      await axios.post(
-        `http://localhost:1234/api/v1/requests/${asks?.[0]._id}/replies`,
-        {
-          ...form
-        }
-      ).then((data) => {
-        const newAsks = asks ? [...asks] : []
-        newAsks[0].replies.push(data.data.data.reply)
-        setAsks(newAsks)
-      })
+    fetchData(`requests/${asks?.[0]._id}/replies`, 'post', form).then((data) => {
+      const newAsks = asks ? [...asks] : []
+      newAsks[0].replies.push(data?.data.data.reply)
+      setAsks(newAsks)
       setIsModalOpen(!isModalOpen)
-      
-    } catch (error) {
-      console.log(error)
-    }
+    })
   }
 
   const handleLike = async (replyID: string) => {
-    try {
-      await axios.patch(`http://localhost:1234/api/v1/replies/${replyID}`, {
-        userID: user?._id
-      }).then((data) => {
+    fetchData(`replies/${replyID}`, 'patch', { userID: user?._id }).then(
+      (data) => {
         const newAsks = asks ? [...asks] : []
-        const replyIndex = newAsks[0].replies.findIndex((reply) => reply._id === replyID)
-        newAsks[0].replies[replyIndex] = data.data.data.reply
+        const replyIndex = newAsks[0].replies.findIndex(
+          (reply) => reply._id === replyID
+        )
+        newAsks[0].replies[replyIndex] = data?.data.data.reply
         setAsks(newAsks)
-      })
-    } catch (error) {
-      console.log(error)
-    }
+      }
+    )
   }
+  // const handleReplySubmit = async (form: ReplyFormState) => {
+  //   hanlders(`requests/${asks?.[0]._id}/replies`, 'post', form).then((data) => {
+  //     const newAsks = asks ? [...asks] : []
+  //     newAsks[0].replies.push(data?.data.data.reply)
+  //     setAsks(newAsks)
+  //     setIsModalOpen(!isModalOpen)
+  //   })
+  // }
+
+  // const handleLike = async (replyID: string) => {
+  //   hanlders(`replies/${replyID}`, 'patch', { userID: user?._id }).then(
+  //     (data) => {
+  //       const newAsks = asks ? [...asks] : []
+  //       const replyIndex = newAsks[0].replies.findIndex(
+  //         (reply) => reply._id === replyID
+  //       )
+  //       newAsks[0].replies[replyIndex] = data?.data.data.reply
+  //       setAsks(newAsks)
+  //     }
+  //   )
+  // }
+
+  if (error || errorData) return <Error />
+  if (loading || loadingData) return <Loading />
   return (
     <>
-      {loading || !asks ? (
-        <p>Loading...</p>
-      ) : (
+      <Modal onClose={() => setIsModalOpen(!isModalOpen)} isOpen={isModalOpen}>
+        <ReplyForm
+          onSubmit={handleReplySubmit}
+          closeModal={() => setIsModalOpen(!isModalOpen)}
+        />
+      </Modal>
+      {asks && (
         <>
-          <Modal
-            onClose={() => setIsModalOpen(!isModalOpen)}
-            isOpen={isModalOpen}
-          >
-            <ReplyForm
-              onSubmit={handleReplySubmit}
-              closeModal={() => setIsModalOpen(!isModalOpen)}
-            />
-          </Modal>
           <div className="w-full mb-6">
             <div className="flex items-center gap-2">
               <img
@@ -96,7 +107,12 @@ const Request: React.FC = () => {
             </div>
           </div>
           {asks[0].replies.map((reply) => (
-            <Reply {...reply} loggedUserId={user?._id} key={reply._id} handleLike={handleLike} />
+            <Reply
+              {...reply}
+              loggedUserId={user?._id}
+              key={reply._id}
+              handleLike={handleLike}
+            />
           ))}
         </>
       )}

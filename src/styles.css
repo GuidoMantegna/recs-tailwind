@@ -38,6 +38,11 @@
   font-weight: bold;
 }
 
+.custom-btn:disabled {
+  background-color: #ccc;
+  font-weight: initial;
+}
+
 .custom-link {
   position: relative;
   display: inline-block;

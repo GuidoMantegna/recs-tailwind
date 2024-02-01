@@ -1,29 +1,22 @@
 import React, { useContext } from 'react'
+// Context
 import { AuthContext } from 'context'
-import AskForm from 'components/AskForm'
-import Ask from 'components/Ask'
-import useAsks from 'customHooks/useAsks'
-import { useFetch } from 'customHooks/useFetch'
+// Components
+import { AskForm, Ask, Error, Loading } from 'components'
+// Custom hooks / Utils
+import { useAsks, useFetch } from 'customHooks'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { toast } from 'react-toastify'
-import Error from 'components/Error'
-import Loading from 'components/Loading'
 
 const Home: React.FC = () => {
   const user = useContext(AuthContext)
   const { asks, loading, error, setAsks } = useAsks(undefined)
-  const { loading: loadingData, error: errorData, fetchData } = useFetch()
+  const { loadingData, errorData, fetchData } = useFetch()
 
   const makeRequest = (ask: string) => {
     fetchData('requests', 'post', { brief: ask }).then(
       (data) => asks && data && setAsks([data.request, ...asks])
     )
   }
-  // const makeRequest = (ask: string) => {
-  //   hanlders('requests', 'post', { brief: ask })
-  //   .then((data) => asks && data && setAsks([data.data.data.request, ...asks]))
-  // }
 
   if (error || errorData) return <Error />
   if (loading || loadingData) return <Loading />

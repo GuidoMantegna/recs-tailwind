@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "utils/constants";
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export const useFetch = () => {
-  // const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
+// Allow cookies to be received from the server and seted in the browser
+axios.defaults.withCredentials = true
+
+const useFetch = () => {
+  const [loadingData, setLoading] = useState(false)
+  const [errorData, setError] = useState(false)
 
   const fetchData = async (url: string, method: string, payload: any) => {
     setLoading(true)
@@ -27,21 +29,10 @@ export const useFetch = () => {
     }
   }
   return {
-    // data,
-    loading,
-    error,
+    loadingData,
+    errorData,
     fetchData
   }
 }
-// export const hanlders = async (url: string, method: string, data: any) => {
-//   try {
-//     const response = await axios({
-//       method,
-//       url: `${BASE_URL}/${url}`,
-//       data,
-//     });
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+
+export default useFetch

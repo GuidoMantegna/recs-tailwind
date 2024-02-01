@@ -49,3 +49,10 @@ export type ReplyFormState = {
   videoURL: string
   availableOn: string
 }
+
+export type LoginForm = {
+  email: string
+  password: string
+  name: string
+  confirmPassword: string
+}

@@ -1,33 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
-import ReplyForm from 'components/ReplyForm'
-import Modal from 'components/Modal'
-import useAsks from '../customHooks/useAsks'
-import { GoCommentDiscussion } from 'react-icons/go'
-import { getFormattedDate } from 'utils'
+// Context
 import { useContext } from 'react'
 import { AuthContext } from 'context'
-import Reply from 'components/Reply'
+// Components
+import { ReplyForm, Modal, Loading, Error, Reply } from 'components'
+// Custom hooks / Utils
+import { useAsks, useFetch } from 'customHooks'
+import { getFormattedDate } from 'utils'
 import { ReplyFormState } from 'interfaces'
-import { useFetch } from 'customHooks/useFetch'
-import Loading from 'components/Loading'
-import Error from 'components/Error'
+// Assets
+import { GoCommentDiscussion } from 'react-icons/go'
 
 const Request: React.FC = () => {
+  const user = useContext(AuthContext)
   const { id } = useParams<{ id: string }>()
   const { asks, loading, error, setAsks } = useAsks(id)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const user = useContext(AuthContext)
-  const { loading: loadingData, error: errorData, fetchData } = useFetch()
+  const { loadingData, errorData, fetchData } = useFetch()
 
   const handleReplySubmit = async (form: ReplyFormState) => {
-    fetchData(`requests/${asks?.[0]._id}/replies`, 'post', form).then((data) => {
-      const newAsks = asks ? [...asks] : []
-      newAsks[0].replies.push(data?.data.data.reply)
-      setAsks(newAsks)
-      setIsModalOpen(!isModalOpen)
-    })
+    fetchData(`requests/${asks?.[0]._id}/replies`, 'post', form).then(
+      (data) => {
+        const newAsks = asks ? [...asks] : []
+        newAsks[0].replies.push(data?.reply)
+        setAsks(newAsks)
+        setIsModalOpen(!isModalOpen)
+      }
+    )
   }
 
   const handleLike = async (replyID: string) => {
@@ -37,32 +37,11 @@ const Request: React.FC = () => {
         const replyIndex = newAsks[0].replies.findIndex(
           (reply) => reply._id === replyID
         )
-        newAsks[0].replies[replyIndex] = data?.data.data.reply
+        newAsks[0].replies[replyIndex] = data?.reply
         setAsks(newAsks)
       }
     )
   }
-  // const handleReplySubmit = async (form: ReplyFormState) => {
-  //   hanlders(`requests/${asks?.[0]._id}/replies`, 'post', form).then((data) => {
-  //     const newAsks = asks ? [...asks] : []
-  //     newAsks[0].replies.push(data?.data.data.reply)
-  //     setAsks(newAsks)
-  //     setIsModalOpen(!isModalOpen)
-  //   })
-  // }
-
-  // const handleLike = async (replyID: string) => {
-  //   hanlders(`replies/${replyID}`, 'patch', { userID: user?._id }).then(
-  //     (data) => {
-  //       const newAsks = asks ? [...asks] : []
-  //       const replyIndex = newAsks[0].replies.findIndex(
-  //         (reply) => reply._id === replyID
-  //       )
-  //       newAsks[0].replies[replyIndex] = data?.data.data.reply
-  //       setAsks(newAsks)
-  //     }
-  //   )
-  // }
 
   if (error || errorData) return <Error />
   if (loading || loadingData) return <Loading />

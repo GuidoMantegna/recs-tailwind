@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { ReplyProps, ReplyFormState } from 'interfaces'
-
+import { ReplyFormState } from 'interfaces'
 
 interface ReplyFormProps {
   onSubmit: (form: ReplyFormState) => void

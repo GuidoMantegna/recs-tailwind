@@ -1,6 +1,5 @@
 import { getFormattedDate } from 'utils'
 import { GoHeart, GoHeartFill } from 'react-icons/go'
-
 import { ReplyProps } from 'interfaces'
 
 const Reply: React.FC<ReplyProps> = ({

@@ -26,7 +26,7 @@ const Header = () => {
         >
           {user ? 'Logout' : 'Login'}
         </Link>
-        <Link to="sign-up" className="text-lg custom-link">
+        <Link to="signup" className="text-lg custom-link">
           Sign up
         </Link>
       </div>

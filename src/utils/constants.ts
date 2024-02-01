@@ -4,4 +4,4 @@ const BASE_URL =
     ? `http://localhost:1234/api/${API_VERSION}`
     : `https://recs-api.vercel.app/api/${API_VERSION}`
 
-export { BASE_URL }
+export { API_VERSION, BASE_URL }

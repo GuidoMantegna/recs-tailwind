@@ -10,6 +10,7 @@ import ErrorPage from 'errorPage'
 import Login from 'routes/Login'
 import Home from 'routes/Home'
 import Request from 'routes/Request'
+import Profile from 'routes/Profile'
 import { Provider } from 'context'
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
       {
         path: 'requests/:id',

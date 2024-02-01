@@ -1,6 +1,7 @@
 import Ask from './Ask'
 import AskForm from './AskForm'
 import Error from './Error'
+import FormField from './FormField'
 import Header from './Header'
 import Loading from './Loading'
 import LoginForm from './LoginForm'
@@ -13,6 +14,7 @@ export {
   Ask,
   AskForm,
   Error,
+  FormField,
   Header,
   Loading,
   LoginForm,

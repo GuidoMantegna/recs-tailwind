@@ -50,9 +50,12 @@ export type ReplyFormState = {
   availableOn: string
 }
 
-export type LoginForm = {
-  email: string
-  password: string
+export type User = {
+  _id?: string
   name: string
+  email: string
+  photo?: string
+  role?: string
+  password: string
   confirmPassword: string
 }

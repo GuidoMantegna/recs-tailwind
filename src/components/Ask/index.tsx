@@ -1,40 +1,15 @@
-import { GoCommentDiscussion, GoQuestion } from 'react-icons/go'
+import { AskProps } from 'interfaces'
+import { GoCommentDiscussion } from 'react-icons/go'
 import { Link } from 'react-router-dom'
-
-interface AskProps {
-  _id: string
-  brief: string
-  // an object with the user data
-  user: {
-    _id: string
-    name: string
-  }
-  replies: [
-    {
-      _id: string
-      reply: string
-      videoURL: string
-      user:{ _id: string; name: string }
-      request: string
-    }
-  ]
-  // an array of objects with the reply data
-  likes: [
-    {
-      _id: string
-      name: string
-    }
-  ]
-  numLikes: number
-  createdAt: string
-}
 
 const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
   const date = new Date(createdAt)
-  const formattedDate = date.toLocaleDateString('en-US', {
-    month: 'short',
-    year: 'numeric'
-  }).toLocaleUpperCase()
+  const formattedDate = date
+    .toLocaleDateString('en-US', {
+      month: 'short',
+      year: 'numeric'
+    })
+    .toLocaleUpperCase()
 
   return (
     <div className="w-full my-8">
@@ -50,12 +25,12 @@ const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
       <div className="border p-2 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2">
         {brief}
       </div>
-      <Link to={`/requests/${_id}`} className="flex justify-end items-center gap-2">
-        {/* <button> */}
-          <GoCommentDiscussion size={20} />
-          Replies {`${replies.length}`}
-        {/* </button> */}
-        {/* <p className="text-sm">Replies {`${replies.length}`}</p> */}
+      <Link
+        to={`/requests/${_id}`}
+        className="flex justify-end items-center gap-2"
+      >
+        <GoCommentDiscussion size={20} />
+        Replies {`${replies.length}`}
       </Link>
     </div>
   )

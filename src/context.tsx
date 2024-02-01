@@ -1,23 +1,17 @@
 import { createContext, useState, useContext, useEffect } from 'react'
-
-interface AuthContextProps {
-  _id: string
-  name: string
-  email: string
-  role: string
-}
+import { User } from 'interfaces'
 
 interface ProviderProps {
   children: React.ReactNode
 }
 
-export const AuthContext = createContext<AuthContextProps | null>(null)
-export const Login = createContext((user: AuthContextProps | null) => {})
+export const AuthContext = createContext<User | null>(null)
+export const Login = createContext((user: User | null) => {})
 
 export const useLogin = () => useContext(Login)
 
 export const Provider: React.FC<ProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<AuthContextProps | null>(() => {
+  const [user, setUser] = useState<User | null>(() => {
     const user = localStorage.getItem('user')
     return user ? JSON.parse(user) : null
   })
@@ -27,7 +21,7 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(user))
   })
 
-  const login = (user: AuthContextProps | null) => {
+  const login = (user: User | null) => {
     setUser(user)
   }
 

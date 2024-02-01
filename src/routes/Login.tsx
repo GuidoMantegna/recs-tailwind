@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // Context
@@ -8,7 +7,7 @@ import { useLogin } from 'context'
 import { LoginForm } from 'components'
 // Custom hooks / Utils
 import { useFetch } from 'customHooks'
-import { LoginForm as LoginFormType } from 'interfaces'
+import { User } from 'interfaces'
 
 const Login: React.FC = () => {
   const login = useLogin()
@@ -18,7 +17,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>,
-    form: LoginFormType
+    form: User
   ) => {
     e.preventDefault()
     fetchData(`users${pathname}`, 'post', form).then((data) => {

@@ -6,6 +6,7 @@ import { User } from 'interfaces'
 // Context
 import { useContext } from 'react'
 import { AuthContext } from 'context'
+import { FormField } from 'components'
 
 type LoginFormProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, form: User) => void
@@ -48,7 +49,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
 
   return (
     <form className="w-3/4" onSubmit={(e) => handleSubmit(e, form)}>
-      {usedFor !== '/login' && (
+      {/* {usedFor !== '/login' && (
         <div id="form-field" className="flex flex-col mb-6">
           <label htmlFor="name">Name 💬</label>
           <span className="relative">
@@ -74,6 +75,28 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
             )}
           </span>
         </div>
+      )} */}
+      {usedFor !== '/login' && (
+        <FormField
+          name="name"
+          label="Name 💬"
+          onChange={handleFormChange}
+          type="text"
+          value={form.name}
+          disabled={usedFor === '/profile' && isDisabled.name}
+        >
+          {usedFor === '/profile' && (
+            <>
+              <button
+                className=" absolute top-2 right-2"
+                onClick={() => handleDisabled('name')}
+                type="button"
+              >
+                {isDisabled.name ? <MdEdit /> : <RxCross2 />}
+              </button>
+            </>
+          )}
+        </FormField>
       )}
       <div id="form-field" className="flex flex-col mb-6">
         <label htmlFor="email">Email 📧</label>

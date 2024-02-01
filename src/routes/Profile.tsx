@@ -24,7 +24,7 @@ const Profile: React.FC = () => {
     e.preventDefault()
     fetchData(`users/${user?._id}`, 'patch', form).then((data) => {
       login(data.user)
-      toast.success('Data up successful')
+      toast.success('Data updated successfully')
     })
   }
 

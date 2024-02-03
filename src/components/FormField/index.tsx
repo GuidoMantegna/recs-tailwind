@@ -5,7 +5,7 @@ interface FormFieldProps {
   name: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   type: string
-  value: string | number
+  value?: string | number | undefined
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -27,8 +27,9 @@ const FormField: React.FC<FormFieldProps> = ({
           type={type}
           id={name}
           value={value}
-          className="border-b-2 border-black px-2 py-1"
+          className="border-b-2 border-black px-2 py-1 w-full"
           disabled={disabled}
+          accept={type === 'file' ? 'image/*' : ''}
         />
         {children}
       </span>

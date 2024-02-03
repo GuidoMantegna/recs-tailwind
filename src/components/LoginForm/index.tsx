@@ -19,8 +19,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
     email: '',
     password: '',
     name: '',
-    confirmPassword: ''
-    // photo: ''
+    confirmPassword: '',
+    photo: null
   })
   const [showPassword, toggle] = useState(false)
   const [isDisabled, setIsDisabled] = useState({
@@ -31,13 +31,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
 
   useEffect(() => {
     if (usedFor === '/profile' && user) {
-      setForm({ ...user })
+      setForm({ ...user, photo: null })
     }
   }, [])
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setForm({ ...form, [name]: name !== 'name' ? value.trim() : value })
+    const { name, value, files } = e.target
+    const finalValue = () => {
+      if (name === 'name') return value
+      if (name === 'photo') return files ? files[0] : null
+      return value.trim()
+    }
+    setForm({ ...form, [name]: finalValue() })
   }
 
   const handleDisabled = (field: string) => {
@@ -47,35 +52,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
     })
   }
 
+  const passwordIcon = () => {
+    if (form.password && showPassword) return '🙊'
+    if (form.password && !showPassword) return '🙈'
+    if (!form.password) return '🐵'
+  }
+
   return (
-    <form className="w-3/4" onSubmit={(e) => handleSubmit(e, form)}>
-      {/* {usedFor !== '/login' && (
-        <div id="form-field" className="flex flex-col mb-6">
-          <label htmlFor="name">Name 💬</label>
-          <span className="relative">
-            <input
-              name="name"
-              onChange={handleFormChange}
-              type="text"
-              id="name"
-              value={form.name}
-              className="border-b-2 border-black px-2 py-1"
-              disabled={usedFor === '/profile' && isDisabled.name}
-            />
-            {usedFor === '/profile' && (
-              <>
-                <button
-                  className=" absolute top-2 right-2"
-                  onClick={() => handleDisabled('name')}
-                  type="button"
-                >
-                  {isDisabled.name ? <MdEdit /> : <RxCross2 />}
-                </button>
-              </>
-            )}
-          </span>
-        </div>
-      )} */}
+    <form className="w-3/4" encType="multipart/form-data" onSubmit={(e) => handleSubmit(e, form)}>
       {usedFor !== '/login' && (
         <FormField
           name="name"
@@ -98,83 +82,61 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
           )}
         </FormField>
       )}
-      <div id="form-field" className="flex flex-col mb-6">
-        <label htmlFor="email">Email 📧</label>
-        <span className="relative">
-          <input
-            name="email"
-            onChange={handleFormChange}
-            type="email"
-            id="email"
-            value={form.email}
-            className="border-b-2 border-black px-2 py-1"
-            disabled={usedFor === '/profile' && isDisabled.email}
-          />
-          {usedFor === '/profile' && (
-            <>
-              <button
-                className=" absolute top-2 right-2"
-                onClick={() => handleDisabled('email')}
-                type="button"
-              >
-                {isDisabled.email ? <MdEdit /> : <RxCross2 />}
-              </button>
-            </>
-          )}
-        </span>
-      </div>
+      <FormField
+        name="email"
+        label="Email 📧"
+        onChange={handleFormChange}
+        type="email"
+        value={form.email}
+        disabled={usedFor === '/profile' && isDisabled.email}
+      >
+        {usedFor === '/profile' && (
+          <>
+            <button
+              className=" absolute top-2 right-2"
+              onClick={() => handleDisabled('email')}
+              type="button"
+            >
+              {isDisabled.email ? <MdEdit /> : <RxCross2 />}
+            </button>
+          </>
+        )}
+      </FormField>
       {usedFor === '/profile' && (
-        <div id="form-field" className="flex flex-col mb-6">
-          <label htmlFor="photo">Photo 📷</label>
-          <input
-            name="photo"
-            onChange={handleFormChange}
-            type="file"
-            id="photo"
-            // value={form.photo}
-            className="border-b-2 border-black px-2 py-1"
-            disabled={usedFor === '/profile'}
-          />
-        </div>
+        <FormField
+          name="photo"
+          label="Photo 📷"
+          onChange={handleFormChange}
+          type="file"
+          // value=''//{form.photo}
+          // disabled={usedFor === '/profile'}
+        />
       )}
       {usedFor !== '/profile' && (
         <>
-          <div id="form-field" className="flex flex-col mb-6">
-            <label htmlFor="password">
-              Password {form.password && showPassword && '🙊'}
-              {form.password && !showPassword && '🙈'}
-              {!form.password && '🐵'}
-            </label>
-            <span className="relative">
-              <input
-                name="password"
-                onChange={handleFormChange}
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                value={form.password}
-                className="border-b-2 border-black px-2 py-1 w-full"
-              />
-              <button
-                className=" absolute top-2 right-2"
-                onClick={() => toggle(!showPassword)}
-                type="button"
-              >
-                {showPassword ? <BiShowAlt /> : <BiHide />}
-              </button>
-            </span>
-          </div>
+          <FormField
+            name="password"
+            label={`Password ${passwordIcon()}`}
+            onChange={handleFormChange}
+            type={showPassword ? 'text' : 'password'}
+            value={form.password}
+          >
+            <button
+              className=" absolute top-2 right-2"
+              onClick={() => toggle(!showPassword)}
+              type="button"
+            >
+              {showPassword ? <BiShowAlt /> : <BiHide />}
+            </button>
+          </FormField>
           {usedFor === '/signup' && (
-            <div id="form-field" className="flex flex-col mb-6">
-              <label htmlFor="confirmPassword">Confirm password</label>
-              <input
-                name="confirmPassword"
-                onChange={handleFormChange}
-                type={showPassword ? 'text' : 'password'}
-                id="confirmPassword"
-                value={form.confirmPassword}
-                className="border-b-2 border-black px-2 py-1 w-full"
-              />
-            </div>
+            <FormField
+              name="confirmPassword"
+              label="Confirm password"
+              onChange={handleFormChange}
+              type={showPassword ? 'text' : 'password'}
+              value={form.confirmPassword}
+            />
           )}
         </>
       )}
@@ -184,7 +146,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
         // disabled={usedFor === '/profile'}
       >
         {
-          { '/login': 'Login', '/singup': 'Sign up', '/profile': 'Update' }[
+          { '/login': 'Login', '/signup': 'Sign up', '/profile': 'Update' }[
             usedFor
           ]
         }

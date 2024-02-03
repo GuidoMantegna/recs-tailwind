@@ -1,3 +1,5 @@
+import { Blob } from "buffer"
+
 export interface AskProps {
   _id: string
   brief: string
@@ -54,7 +56,7 @@ export type User = {
   _id?: string
   name: string
   email: string
-  photo?: string
+  photo?: any
   role?: string
   password: string
   confirmPassword: string

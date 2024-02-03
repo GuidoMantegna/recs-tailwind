@@ -22,7 +22,15 @@ const Profile: React.FC = () => {
     form: User
   ) => {
     e.preventDefault()
-    fetchData(`users/${user?._id}`, 'patch', form).then((data) => {
+    const formData = new FormData()
+    formData.append('name', form.name)
+    formData.append('email', form.email)
+    formData.append('photo', form.photo)
+    // for (const key in form) {
+    //   formData.append(key, form[key])
+    // }
+    const userData = form.photo ? formData : form
+    fetchData(`users/${user?._id}`, 'patch', userData).then((data) => {
       login(data.user)
       toast.success('Data updated successfully')
     })

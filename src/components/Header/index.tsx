@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <header className="flex justify-between items-center p-5">
-      <p className="font-bold  text-2xl">🎥 RECS</p>
+      <Link to='' className="font-bold  text-2xl">🎥 RECS</Link>
       {user ? (
         <div>
           <Link to="profile" className="text-lg mr-4 custom-link">

@@ -11,6 +11,7 @@ import Login from 'routes/Login'
 import Home from 'routes/Home'
 import Request from 'routes/Request'
 import Profile from 'routes/Profile'
+import Favs from 'routes/Favs'
 import { Provider } from 'context'
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: 'requests/:id',
         element: <Request />,
+      },
+      {
+        path: 'favs',
+        element: <Favs />,
       }
     ],
   },

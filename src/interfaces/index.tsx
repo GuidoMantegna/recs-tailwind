@@ -35,13 +35,13 @@ export interface AskProps {
 export type ReplyProps = {
   _id: string
   reply: string
+  createdAt: string,
   videoURL: string
+  likes: [{ _id: string; name: string }]
   user: { _id: string; name: string }
   request: string
-  likes: [{ _id: string; name: string }]
-  numLikes: number,
   availableOn: string,
-  createdAt: string,
+  numLikes: number,
   loggedUserId: string | undefined // tells us if the user has liked the reply or not (Not in the API)
   handleLike: (replyID: string) => void
 }

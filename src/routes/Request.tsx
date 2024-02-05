@@ -15,7 +15,7 @@ import { GoCommentDiscussion } from 'react-icons/go'
 const Request: React.FC = () => {
   const user = useContext(AuthContext)
   const { id } = useParams<{ id: string }>()
-  const { asks, loading, error, setAsks } = useAsks(id)
+  const { asks, loading, error, setAsks } = useAsks(id, 'replies')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { loadingData, errorData, fetchData } = useFetch()
 

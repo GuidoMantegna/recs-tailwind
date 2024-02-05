@@ -10,6 +10,7 @@ import ErrorPage from 'errorPage'
 import Login from 'routes/Login'
 import Home from 'routes/Home'
 import Request from 'routes/Request'
+import MyRequest from 'routes/MyRequests'
 import Profile from 'routes/Profile'
 import Favs from 'routes/Favs'
 import { Provider } from 'context'
@@ -39,6 +40,14 @@ const router = createBrowserRouter([
       {
         path: 'requests/:id',
         element: <Request />,
+      },
+      {
+        path: 'requests',
+        element: <MyRequest />,
+      },
+      {
+        path: 'replies',
+        element: <Favs />,
       },
       {
         path: 'favs',

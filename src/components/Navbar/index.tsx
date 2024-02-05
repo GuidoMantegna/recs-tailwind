@@ -1,20 +1,36 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { AiOutlineQuestion } from 'react-icons/ai'
 import { MdFavoriteBorder } from 'react-icons/md'
 
 const Navbar: React.FC = () => {
+  const { pathname } = useLocation()
   return (
     <nav className="fixed bottom-0 w-full bg-white border-t border-gray-300  h-20 flex justify-around">
-      <div className="w-20 flex flex-col justify-center items-center">
+      <Link
+        to="replies"
+        className={`w-20 flex flex-col justify-center items-center ${
+          pathname === '/replies' && 'font-bold'
+        }`}
+      >
         <GoCommentDiscussion size={25} />
         <p className="text-sm">Replies</p>
-      </div>
-      <div className="w-20 flex flex-col justify-center items-center">
+      </Link>
+      <Link
+        to="requests"
+        className={`w-20 flex flex-col justify-center items-center ${
+          pathname === '/requests' && 'font-bold'
+        }`}
+      >
         <AiOutlineQuestion size={25} />
         <p className=" text-sm">Requests </p>
-      </div>
-      <Link to='favs' className="w-20 flex flex-col justify-center items-center">
+      </Link>
+      <Link
+        to="favs"
+        className={`w-20 flex flex-col justify-center items-center ${
+          pathname === '/favs' && 'font-bold'
+        }`}
+      >
         <MdFavoriteBorder size={25} /> <p className="text-sm">Favs</p>
       </Link>
     </nav>

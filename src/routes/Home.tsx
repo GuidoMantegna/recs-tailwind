@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 const Home: React.FC = () => {
   const user = useContext(AuthContext)
-  const { asks, loading, error, setAsks } = useAsks(undefined)
+  const { asks, loading, error, setAsks } = useAsks(undefined, 'allRequests')
   const { loadingData, errorData, fetchData } = useFetch()
 
   const makeRequest = (ask: string) => {

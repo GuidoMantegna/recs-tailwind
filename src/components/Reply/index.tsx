@@ -1,3 +1,4 @@
+import { STATIC_BASE_URL } from '../../utils/constants'
 import { getFormattedDate } from 'utils'
 import { GoHeart, GoHeartFill } from 'react-icons/go'
 import { ReplyProps } from 'interfaces'
@@ -18,7 +19,7 @@ const Reply: React.FC<ReplyProps> = ({
     <div className="w-full" key={_id}>
       <div className="flex items-center gap-2">
         <img
-          src="/img/users/user-7.jpg"
+          src={`${STATIC_BASE_URL}/img/users/user-${user._id}.jpeg`}
           alt="user photo"
           className="rounded-full w-10"
         />

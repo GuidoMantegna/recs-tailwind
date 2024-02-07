@@ -11,6 +11,7 @@ import { getFormattedDate } from 'utils'
 import { ReplyFormState } from 'interfaces'
 // Assets
 import { GoCommentDiscussion } from 'react-icons/go'
+import { STATIC_BASE_URL } from 'utils/constants'
 
 const Request: React.FC = () => {
   const user = useContext(AuthContext)
@@ -58,7 +59,7 @@ const Request: React.FC = () => {
           <div className="w-full mb-6">
             <div className="flex items-center gap-2">
               <img
-                src="/img/users/user-7.jpg"
+                src={`${STATIC_BASE_URL}/img/users/user-${asks[0].user._id}.jpeg`}
                 alt="user photo"
                 className="rounded-full w-10"
               />

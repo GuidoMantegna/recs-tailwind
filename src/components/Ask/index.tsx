@@ -1,3 +1,4 @@
+import { STATIC_BASE_URL } from '../../utils/constants'
 import { AskProps } from 'interfaces'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { Link } from 'react-router-dom'
@@ -15,7 +16,7 @@ const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
     <div className="w-full my-8">
       <div className="flex items-center gap-2">
         <img
-          src="/img/users/user-7.jpg"
+          src={`${STATIC_BASE_URL}/img/users/user-${user._id}.jpeg`}
           alt="user photo"
           className="rounded-full w-10"
         />

@@ -23,7 +23,7 @@ const Home: React.FC = () => {
   return (
     <>
       {user ? (
-        <AskForm makeRequest={makeRequest} />
+        <AskForm makeRequest={makeRequest} userID={user?._id} />
       ) : (
         <Link to="/login" className="custom-btn">
           Login to start asking for recomendations

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { STATIC_BASE_URL } from 'utils/constants'
 
 interface AskFormProps {
   makeRequest: (ask: string) => void
+  userID: string | undefined
 }
 
-const AskForm: React.FC<AskFormProps> = ({ makeRequest }) => {
+const AskForm: React.FC<AskFormProps> = ({ makeRequest, userID }) => {
   const [ask, setAsk] = useState('')
   const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setAsk(e.target.value)
@@ -20,7 +22,7 @@ const AskForm: React.FC<AskFormProps> = ({ makeRequest }) => {
       <div id="form-field" className="flex flex-col mb-6">
         <label htmlFor="" className="flex items-center justify-center gap-4">
           <img
-            src="/img/users/user-7.jpg"
+            src={`${STATIC_BASE_URL}/img/users/user-${userID}.jpeg`}	
             alt="user photo"
             className="rounded-full w-12 mb-2"
           />

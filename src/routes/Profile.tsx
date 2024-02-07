@@ -10,6 +10,7 @@ import { Loading, LoginForm, Error } from 'components'
 // Custom hooks / Utils
 import { useFetch } from 'customHooks'
 import { User } from 'interfaces'
+import { STATIC_BASE_URL } from 'utils/constants'
 
 const Profile: React.FC = () => {
   const user = useContext(AuthContext)
@@ -42,7 +43,7 @@ const Profile: React.FC = () => {
     <div>
       <div className='flex items-center gap-2'>
         <img
-          src="/img/users/user-7.jpg"
+          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}	
           alt="user photo"
           className="rounded-full w-20"
         />

@@ -4,9 +4,14 @@ import { STATIC_BASE_URL } from 'utils/constants'
 interface AskFormProps {
   makeRequest: (ask: string) => void
   userID: string | undefined
+  btnLoading?: boolean
 }
 
-const AskForm: React.FC<AskFormProps> = ({ makeRequest, userID }) => {
+const AskForm: React.FC<AskFormProps> = ({
+  makeRequest,
+  userID,
+  btnLoading
+}) => {
   const [ask, setAsk] = useState('')
   const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setAsk(e.target.value)
@@ -22,7 +27,7 @@ const AskForm: React.FC<AskFormProps> = ({ makeRequest, userID }) => {
       <div id="form-field" className="flex flex-col mb-6">
         <label htmlFor="" className="flex items-center justify-center gap-4">
           <img
-            src={`${STATIC_BASE_URL}/img/users/user-${userID}.jpeg`}	
+            src={`${STATIC_BASE_URL}/img/users/user-${userID}.jpeg`}
             alt="user photo"
             className="rounded-full w-12 mb-2"
           />
@@ -31,12 +36,19 @@ const AskForm: React.FC<AskFormProps> = ({ makeRequest, userID }) => {
         <textarea
           name="name"
           onChange={handleFormChange}
+          value={ask}
           placeholder="I feel bored, I want to watch something funny..."
           id="name"
           className="border-b-2 border-black px-2 py-2"
         />
       </div>
-      <button className="custom-btn w-full">Ask</button>
+      <button
+        className={`custom-btn btn-loading w-full ${
+          btnLoading && 'animate-pulse'
+        }`}
+      >
+        Ask
+      </button>
     </form>
   )
 }

@@ -15,10 +15,7 @@ const Login: React.FC = () => {
   const { pathname } = useLocation()
   const { fetchData } = useFetch()
 
-  const handleSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
-    form: User
-  ) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, form: User) => {
     e.preventDefault()
     fetchData(`users${pathname}`, 'post', form).then((data) => {
       login(data.user)
@@ -27,7 +24,11 @@ const Login: React.FC = () => {
     })
   }
 
-  return <LoginForm handleSubmit={handleSubmit} usedFor={pathname} />
+  return (
+    <div className="w-3/4 m-auto">
+      <LoginForm handleSubmit={handleSubmit} usedFor={pathname} />
+    </div>
+  )
 }
 
 export default Login

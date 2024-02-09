@@ -55,10 +55,10 @@ const router = createBrowserRouter([
       }
     ],
   },
-  // {
-  //   path: '/home',
-  //   element: <Landing />,
-  // }
+  {
+    path: '/home',
+    element: <Landing />,
+  }
 ])
 
 const container = document.getElementById('root') as HTMLDivElement

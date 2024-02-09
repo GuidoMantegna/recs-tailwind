@@ -17,7 +17,7 @@
   transition: all .25s;
 }
 
-.custom-btn::after {
+.custom-btn.btn-effect::after {
   content: '';
   display: block;
   width: 25%;
@@ -26,11 +26,11 @@
   position: absolute;
   top: 0;
   z-index: -1;
-  transform: skewX(-25deg) translateX(-150%);
+  transform: skewX(-25deg) translateX(-200%);
   transition: all .5s ease-in-out;
 }
 
-.custom-btn:hover::after {
+.custom-btn.btn-effect:hover::after {
   transform: skewX(-25deg) translateX(400%);
 }
 
@@ -42,6 +42,12 @@
   background-color: #ccc;
   font-weight: initial;
 }
+
+/* .custom-btn.btn-loading {
+  background-color: rgba(229, 231, 235, 0.8)
+
+} */
+/* Animation to  */
 
 .custom-link {
   position: relative;

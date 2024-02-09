@@ -40,14 +40,14 @@ const Profile: React.FC = () => {
   if (loadingData) return <Loading />
   if (errorData) return <Error />
   return (
-    <div>
-      <div className='flex items-center gap-2'>
+    <div className='w-3/4 m-auto'>
+      <div className='flex items-center gap-3 mb-4'>
         <img
           src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}	
           alt="user photo"
           className="rounded-full w-20"
         />
-        <p className="text-lg">Welcome {user?.name}!</p>
+        <p className="text-lg font-semibold">Welcome {user?.name}!</p>
       </div>
       <LoginForm handleSubmit={handleSubmit} usedFor={pathname}/>
     </div>

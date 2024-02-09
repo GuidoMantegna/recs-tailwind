@@ -35,7 +35,7 @@ const Home: React.FC = () => {
       (data) =>
         asks &&
         data &&
-        // set asks with current user data beacuse the user is not fetched from the server completely 
+        // set asks with current user data beacuse the user is not fetched from the server completely
         setAsks([
           { ...data.request, user: { _id: user?._id, name: user?.name } },
           ...asks
@@ -44,11 +44,11 @@ const Home: React.FC = () => {
   }
 
   if (error || errorData) return <Error />
-  // if (loading || loadingData) return <Loading />
+  if (loading) return <Loading />
   return (
     <>
       {user ? (
-        <AskForm makeRequest={makeRequest} userID={user?._id} />
+        <AskForm makeRequest={makeRequest} userID={user?._id} btnLoading={loadingData}/>
       ) : (
         <Link to="/login" className="custom-btn">
           Login to start asking for recomendations
@@ -56,13 +56,12 @@ const Home: React.FC = () => {
       )}
 
       <div className="w-full">
-        {loading ||
-          (loadingData && (
-            <>
-              <AskLoading />
-              {asks?.map((ask) => <Ask key={ask._id} {...ask} />)}
-            </>
-          ))}
+        {loadingData && (
+          <>
+            <AskLoading />
+            {asks?.map((ask) => <Ask key={ask._id} {...ask} />)}
+          </>
+        )}
         {asks?.map((ask) => <Ask key={ask._id} {...ask} />)}
       </div>
     </>

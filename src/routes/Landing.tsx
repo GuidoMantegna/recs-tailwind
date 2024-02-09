@@ -36,7 +36,7 @@ const Landing = () => {
         </div>
       </div>
       <Link to="/">
-        <button className="custom-btn">Check it out ⚡</button>
+        <button className="custom-btn btn-effect">Check it out ⚡</button>
       </Link>
     </div>
   )

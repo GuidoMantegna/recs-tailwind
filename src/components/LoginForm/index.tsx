@@ -60,7 +60,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
   }
 
   return (
-    <form className="w-3/4" encType="multipart/form-data" onSubmit={(e) => handleSubmit(e, form)}>
+    <form className="w-full" encType="multipart/form-data" onSubmit={(e) => handleSubmit(e, form)}>
       {usedFor !== '/login' && (
         <FormField
           name="name"

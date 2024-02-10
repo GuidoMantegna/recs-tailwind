@@ -6,6 +6,7 @@ import { AuthContext } from 'context'
 import { Loading, Reply, Error } from 'components'
 // Custom hooks / Utils
 import useReplies from 'customHooks/useReplies'
+import { STATIC_BASE_URL } from 'utils/constants'
 
 const Favs: React.FC = () => {
   const user = useContext(AuthContext)
@@ -29,6 +30,14 @@ const Favs: React.FC = () => {
   if (error) return <Error />
   return (
     <div>
+      <div className='flex items-center gap-3 mb-4'>
+        <img
+          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}	
+          alt="user photo"
+          className="rounded-full w-12"
+        />
+        <p className="text-lg font-semibold">My {pathname.slice(1)}</p>
+      </div>
       {replies &&
         replies.map((reply) => (
           <Reply

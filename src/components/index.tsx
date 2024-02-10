@@ -1,5 +1,6 @@
 import Ask from './Ask'
 import AskForm from './AskForm'
+import AskSkeleton from './AskSkeleton'
 import Error from './Error'
 import FormField from './FormField'
 import Header from './Header'
@@ -13,6 +14,7 @@ import ReplyForm from './ReplyForm'
 export {
   Ask,
   AskForm,
+  AskSkeleton,
   Error,
   FormField,
   Header,

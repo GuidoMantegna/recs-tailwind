@@ -12,9 +12,10 @@ import { FormField } from 'components'
 type LoginFormProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, form: User) => void
   usedFor: string
+  btnLoading?: boolean
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor, btnLoading }) => {
   const user = useContext(AuthContext)
   const [form, setForm] = useState<User>({
     email: '',
@@ -142,9 +143,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor }) => {
         </>
       )}
       <button
-        className="custom-btn w-full"
+        className={`custom-btn w-full ${
+          btnLoading && 'animate-pulse'
+        }`}
         type="submit"
-        // disabled={usedFor === '/profile'}
+        disabled={btnLoading}
       >
         {
           { '/login': 'Login', '/signup': 'Sign up', '/profile': 'Update' }[

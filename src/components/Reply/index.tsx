@@ -1,4 +1,5 @@
 import { STATIC_BASE_URL } from '../../utils/constants'
+import { useLocation } from 'react-router-dom'
 import { getFormattedDate } from 'utils'
 import { GoHeart, GoHeartFill } from 'react-icons/go'
 import { ReplyProps } from 'interfaces'
@@ -15,8 +16,11 @@ const Reply: React.FC<ReplyProps> = ({
   loggedUserId,
   handleLike
 }) => {
+  const { pathname } = useLocation()
+
   return (
-    <div className="w-full" key={_id}>
+    <div className="w-full py-2" key={_id}>
+      { !['/replies', '/favs'].includes(pathname) &&
       <div className="flex items-center gap-2">
         <img
           src={`${STATIC_BASE_URL}/img/users/user-${user._id}.jpeg`}
@@ -28,10 +32,12 @@ const Reply: React.FC<ReplyProps> = ({
           {getFormattedDate(createdAt)}
         </span>
       </div>
+      }
       <div className="border p-4 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2">
+      {/* <div className="border p-4 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2 min-w-fit"> */}
         <p>{reply}</p>
         <iframe
-          className=" my-2 mx-auto"
+          className="my-2 mx-auto"
           title="naruto"
           src={videoURL.replace('watch?v=', 'embed/')}
           allowFullScreen

@@ -37,7 +37,7 @@ const Profile: React.FC = () => {
     })
   }
 
-  if (loadingData) return <Loading />
+  // if (loadingData) return <Loading />
   if (errorData) return <Error />
   return (
     <div className='w-3/4 m-auto'>
@@ -49,7 +49,7 @@ const Profile: React.FC = () => {
         />
         <p className="text-lg font-semibold">Welcome {user?.name}!</p>
       </div>
-      <LoginForm handleSubmit={handleSubmit} usedFor={pathname}/>
+      <LoginForm handleSubmit={handleSubmit} usedFor={pathname} btnLoading={loadingData}/>
     </div>
   )
 }

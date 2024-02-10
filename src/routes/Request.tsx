@@ -4,7 +4,14 @@ import { useParams } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from 'context'
 // Components
-import { ReplyForm, Modal, Loading, Error, Reply } from 'components'
+import {
+  ReplyForm,
+  Modal,
+  Loading,
+  Error,
+  Reply,
+  AskSkeleton
+} from 'components'
 // Custom hooks / Utils
 import { useAsks, useFetch } from 'customHooks'
 import { getFormattedDate } from 'utils'
@@ -21,12 +28,15 @@ const Request: React.FC = () => {
   const { loadingData, errorData, fetchData } = useFetch()
 
   const handleReplySubmit = async (form: ReplyFormState) => {
+    setIsModalOpen(!isModalOpen)
     fetchData(`requests/${asks?.[0]._id}/replies`, 'post', form).then(
       (data) => {
         const newAsks = asks ? [...asks] : []
-        newAsks[0].replies.push(data?.reply)
+        newAsks[0].replies.unshift({
+          ...data?.reply,
+          user: { _id: user?._id, name: user?.name }
+        })
         setAsks(newAsks)
-        setIsModalOpen(!isModalOpen)
       }
     )
   }
@@ -45,7 +55,7 @@ const Request: React.FC = () => {
   }
 
   if (error || errorData) return <Error />
-  if (loading || loadingData) return <Loading />
+  if (loading) return <Loading />
   return (
     <>
       <Modal onClose={() => setIsModalOpen(!isModalOpen)} isOpen={isModalOpen}>
@@ -68,6 +78,7 @@ const Request: React.FC = () => {
                 {getFormattedDate(asks[0].createdAt)}
               </span>
             </div>
+
             <div className="p-4 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2 bg-slate-100">
               {asks[0].brief}
             </div>
@@ -77,15 +88,31 @@ const Request: React.FC = () => {
                 asks[0].replies.length > 1 ? 'Replies' : 'Reply'
               }`}
             </div>
-            <div className="w-full flex justify-center">
-              <button
-                className="custom-btn w-40 my-4"
-                onClick={() => setIsModalOpen(!isModalOpen)}
-              >
-                Reply
-              </button>
-            </div>
+            {user && (
+              <div className="w-full flex justify-center">
+                <button
+                  className="custom-btn w-full my-4"
+                  onClick={() => setIsModalOpen(!isModalOpen)}
+                >
+                  Reply
+                </button>
+              </div>
+            )}
           </div>
+          {loadingData && (
+            <>
+              <AskSkeleton height="h-40" />
+
+              {asks[0].replies.map((reply) => (
+                <Reply
+                  {...reply}
+                  loggedUserId={user?._id}
+                  key={reply._id}
+                  handleLike={handleLike}
+                />
+              ))}
+            </>
+          )}
           {asks[0].replies.map((reply) => (
             <Reply
               {...reply}

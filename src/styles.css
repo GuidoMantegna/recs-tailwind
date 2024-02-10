@@ -6,6 +6,9 @@
   height: 100vh;
 }
 
+iframe {
+  max-width: -webkit-fill-available;
+}
 .custom-btn {
   border: 2px solid #000;
   border-bottom: 4px solid #000;
@@ -42,12 +45,6 @@
   background-color: #ccc;
   font-weight: initial;
 }
-
-/* .custom-btn.btn-loading {
-  background-color: rgba(229, 231, 235, 0.8)
-
-} */
-/* Animation to  */
 
 .custom-link {
   position: relative;

@@ -143,7 +143,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor, btnLoading
         </>
       )}
       <button
-        className={`custom-btn w-full ${
+        className={`custom-btn w-full mt-5 mb-10 ${
           btnLoading && 'animate-pulse'
         }`}
         type="submit"

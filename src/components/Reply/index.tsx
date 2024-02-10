@@ -33,8 +33,7 @@ const Reply: React.FC<ReplyProps> = ({
         </span>
       </div>
       }
-      <div className="border p-4 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2">
-      {/* <div className="border p-4 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2 min-w-fit"> */}
+      <div className="border p-4 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2 dark:border-green-900">
         <p>{reply}</p>
         <iframe
           className="my-2 mx-auto"

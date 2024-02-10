@@ -38,6 +38,13 @@ const Landing = () => {
       <Link to="/">
         <button className="custom-btn btn-effect w-48">Check it out ⚡</button>
       </Link>
+      <Link
+        to="https://guidomantegna.github.io/GuidoMantegna/"
+        target="blank"
+        className="text-sm text-center italic pb-2"
+      >
+        Developed by Guido Mantegna
+      </Link>
     </div>
   )
 }

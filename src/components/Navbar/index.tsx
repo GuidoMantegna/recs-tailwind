@@ -6,7 +6,7 @@ import { MdFavoriteBorder } from 'react-icons/md'
 const Navbar: React.FC = () => {
   const { pathname } = useLocation()
   return (
-    <nav className="fixed bottom-0 w-full md:w-[150px] bg-white border-t border-gray-300  h-20 md:h-full flex items-center md:flex-col justify-around md:justify-evenly">
+    <nav className="sticky bottom-0 w-full bg-white dark:bg-slate-900 border-t border-gray-300 dark:border-green-900 p-4 flex items-center justify-around">
       <Link
         to="replies"
         className={`w-20 flex flex-col justify-center items-center ${

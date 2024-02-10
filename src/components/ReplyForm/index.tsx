@@ -48,12 +48,12 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
         placeholder="Available on..."
       />
       <div className="flex flex-col gap-1 mt-4">
-        <button type="submit" className="custom-btn mt-4 grow">
+        <button type="submit" className="custom-btn mt-4 grow dark:text-white">
           Reply
         </button>
         <button
           type="button"
-          className="custom-btn mt-4 grow bg-slate-200"
+          className="custom-btn mt-4 grow bg-slate-200 dark:bg-slate-700"
           onClick={closeModal}
         >
           Cancel

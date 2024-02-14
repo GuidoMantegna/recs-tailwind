@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const pics = [
-  // 1, 2, 3, 4, 5, 6, 7
-  5, 3, 7
-]
 const pics2 = [
-  // 1, 2, 3, 4, 5, 6, 7
   7, 2, 5
 ]
 const Landing = () => {

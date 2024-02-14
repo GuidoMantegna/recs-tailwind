@@ -6,13 +6,14 @@ import App from 'components/App'
 import Layout from 'routes/Layout'
 import React from 'react'
 import Landing from 'routes/Landing'
-import ErrorPage from 'errorPage'
 import Login from 'routes/Login'
 import Home from 'routes/Home'
 import Request from 'routes/Request'
 import MyRequest from 'routes/MyRequests'
 import Profile from 'routes/Profile'
 import Favs from 'routes/Favs'
+import ErrorPage from 'errorPage'
+import Error from 'components/Error'
 import { Provider } from 'context'
 
 const router = createBrowserRouter([
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/home',
+    path: '/landing',
     element: <Landing />,
   }
 ])

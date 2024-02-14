@@ -91,8 +91,9 @@ const Request: React.FC = () => {
             {user && (
               <div className="w-full flex justify-center">
                 <button
-                  className="custom-btn w-full my-10"
+                  className={`custom-btn w-full my-10 ${loadingData && 'animate-pulse'}`}
                   onClick={() => setIsModalOpen(!isModalOpen)}
+                  disabled={loadingData}
                 >
                   Reply
                 </button>

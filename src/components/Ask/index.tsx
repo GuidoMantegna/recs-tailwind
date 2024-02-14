@@ -28,7 +28,7 @@ const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
               <span className="font-extralight text-sm">{formattedDate}</span>
             </div>
           )}
-          <div className="border p-2 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2">
+          <div className="border dark:border-green-900 p-2 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2">
             {brief}
           </div>
           <Link

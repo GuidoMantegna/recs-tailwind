@@ -79,7 +79,7 @@ const Request: React.FC = () => {
               </span>
             </div>
 
-            <div className="p-4 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2 bg-slate-100">
+            <div className="p-4 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2 bg-slate-100 dark:bg-slate-800">
               {asks[0].brief}
             </div>
             <div className="flex items-center gap-2 pl-4">
@@ -91,8 +91,9 @@ const Request: React.FC = () => {
             {user && (
               <div className="w-full flex justify-center">
                 <button
-                  className="custom-btn w-full my-4"
+                  className={`custom-btn w-full my-10 ${loadingData && 'animate-pulse'}`}
                   onClick={() => setIsModalOpen(!isModalOpen)}
+                  disabled={loadingData}
                 >
                   Reply
                 </button>

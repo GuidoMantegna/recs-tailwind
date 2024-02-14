@@ -3,7 +3,11 @@
 }
 
 #root {
-  height: 100vh;
+  min-height: 100vh;
+}
+
+input, textarea {
+  background: none;
 }
 
 iframe {
@@ -13,7 +17,6 @@ iframe {
   border: 2px solid #000;
   border-bottom: 4px solid #000;
   border-right: 4px solid #000;
-  /* width: 150px; */
   padding: 10px;
   position: relative;
   overflow: hidden;
@@ -30,7 +33,7 @@ iframe {
   top: 0;
   z-index: -1;
   transform: skewX(-25deg) translateX(-200%);
-  transition: all .5s ease-in-out;
+  transition: translateX .5s ease-in-out;
 }
 
 .custom-btn.btn-effect:hover::after {
@@ -38,7 +41,7 @@ iframe {
 }
 
 .custom-btn:hover {
-  font-weight: bold;
+  letter-spacing: .8px;
 }
 
 .custom-btn:disabled {

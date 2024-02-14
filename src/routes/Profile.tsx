@@ -27,13 +27,11 @@ const Profile: React.FC = () => {
     formData.append('name', form.name)
     formData.append('email', form.email)
     formData.append('photo', form.photo)
-    // for (const key in form) {
-    //   formData.append(key, form[key])
-    // }
     const userData = form.photo ? formData : form
     fetchData(`users/${user?._id}`, 'patch', userData).then((data) => {
       login(data.user)
       toast.success('Data updated successfully')
+      form.photo && window.location.reload()
     })
   }
 
@@ -41,11 +39,12 @@ const Profile: React.FC = () => {
   if (errorData) return <Error />
   return (
     <div className='w-3/4 m-auto'>
-      <div className='flex items-center gap-3 mb-4'>
+      <div className='flex items-center justify-center gap-3 mb-6'>
         <img
-          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}	
+          src={user ? `${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg` : undefined}	
+          onError={(e) => e.currentTarget.setAttribute('src', '/img/users/default.webp')}
           alt="user photo"
-          className="rounded-full w-20"
+          className="rounded-full w-20 border p-1"
         />
         <p className="text-lg font-semibold">Welcome {user?.name}!</p>
       </div>

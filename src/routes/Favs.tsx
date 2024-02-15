@@ -17,10 +17,12 @@ const Favs: React.FC = () => {
   if (error) return <Error />
   return (
     <div>
-      <div className='flex items-center gap-3 mb-4'>
+      <div className="flex items-center gap-3 mb-4">
         <img
-          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}	
-          onError={(e) => e.currentTarget.setAttribute('src', '/img/users/default.webp')}
+          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}
+          onError={(e) =>
+            e.currentTarget.setAttribute('src', '/img/users/default.webp')
+          }
           alt="user photo"
           className="rounded-full w-12"
         />
@@ -28,12 +30,7 @@ const Favs: React.FC = () => {
       </div>
       {replies &&
         replies.map((reply) => (
-          <Reply
-            {...reply}
-            loggedUserId={user?._id}
-            key={reply._id}
-            handleLike={() => {}}
-          />
+          <Reply {...reply} loggedUserId={user?._id} key={reply._id} />
         ))}
     </div>
   )

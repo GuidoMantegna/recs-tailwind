@@ -15,7 +15,7 @@ const FormField: React.FC<FormFieldProps> = ({
   name,
   onChange,
   type,
-  value,
+  value
 }) => {
   return (
     <div id="form-field" className="flex flex-col mb-6">

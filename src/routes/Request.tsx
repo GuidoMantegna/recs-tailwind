@@ -10,7 +10,8 @@ import {
   Loading,
   Error,
   Reply,
-  AskSkeleton
+  AskSkeleton,
+  AskForm
 } from 'components'
 // Custom hooks / Utils
 import { useAsks, useFetch } from 'customHooks'
@@ -66,11 +67,14 @@ const Request: React.FC = () => {
       </Modal>
       {asks && (
         <>
+          {/* REQUEST */}
           <div className="w-full mb-6">
             <div className="flex items-center gap-2">
               <img
                 src={`${STATIC_BASE_URL}/img/users/user-${asks[0].user._id}.jpeg`}
-                onError={(e) => e.currentTarget.setAttribute('src', '/img/users/default.webp')}
+                onError={(e) =>
+                  e.currentTarget.setAttribute('src', '/img/users/default.webp')
+                }
                 alt="user photo"
                 className="rounded-full w-10"
               />
@@ -79,7 +83,6 @@ const Request: React.FC = () => {
                 {getFormattedDate(asks[0].createdAt)}
               </span>
             </div>
-
             <div className="p-4 h-20 overflow-hidden whitespace-nowrap text-ellipsis dialog-box my-2 bg-slate-100 dark:bg-slate-800">
               {asks[0].brief}
             </div>
@@ -92,7 +95,9 @@ const Request: React.FC = () => {
             {user && (
               <div className="w-full flex justify-center">
                 <button
-                  className={`custom-btn w-full my-10 ${loadingData && 'animate-pulse'}`}
+                  className={`custom-btn w-full my-10 ${
+                    loadingData && 'animate-pulse'
+                  }`}
                   onClick={() => setIsModalOpen(!isModalOpen)}
                   disabled={loadingData}
                 >
@@ -101,28 +106,18 @@ const Request: React.FC = () => {
               </div>
             )}
           </div>
-          {loadingData && (
-            <>
-              <AskSkeleton height="h-40" />
-
-              {asks[0].replies.map((reply) => (
-                <Reply
-                  {...reply}
-                  loggedUserId={user?._id}
-                  key={reply._id}
-                  handleLike={handleLike}
-                />
-              ))}
-            </>
-          )}
-          {asks[0].replies.map((reply) => (
-            <Reply
-              {...reply}
-              loggedUserId={user?._id}
-              key={reply._id}
-              handleLike={handleLike}
-            />
-          ))}
+          {/* REPLIES */}
+          <>
+            {loadingData && <AskSkeleton height="h-40" />}
+            {asks[0].replies.map((reply) => (
+              <Reply
+                {...reply}
+                loggedUserId={user?._id}
+                key={reply._id}
+                handleLike={handleLike}
+              />
+            ))}
+          </>
         </>
       )}
     </>

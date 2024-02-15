@@ -1,6 +1,6 @@
-import { useState } from "react";
-import axios from "axios";
-import { BASE_URL } from "utils/constants";
+import { useState } from 'react'
+import axios from 'axios'
+import { BASE_URL } from 'utils/constants'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -11,18 +11,18 @@ const useFetch = () => {
   const [loadingData, setLoading] = useState(false)
   const [errorData, setError] = useState(false)
 
-  const fetchData = async (url: string, method: string, payload: any) => {
+  const fetchData = async (url: string, method: string, payload?: any) => {
     setLoading(true)
     try {
       const data = await axios({
         method,
         url: `${BASE_URL}/${url}`,
-        data: payload,
-      });
+        data: payload
+      })
       setLoading(false)
       return data.data.data
     } catch (error: any) {
-      console.log(error);
+      console.log(error)
       toast.error(error.response.data.message)
       setLoading(false)
       setError(true)

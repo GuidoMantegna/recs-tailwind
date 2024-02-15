@@ -22,8 +22,8 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     onSubmit(reply)
-    // setReply('')
   }
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <textarea

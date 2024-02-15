@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { AskProps } from 'interfaces'
 import { BASE_URL } from 'utils/constants'
@@ -11,11 +10,13 @@ const useAsks = (id: string | undefined, usedFor: string) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  const URL = {
-    allRequests: `${BASE_URL}/requests`,
-    userRequests: `${BASE_URL}/requests?user=${id}`,
-    replies: `${BASE_URL}/requests/${id}`
-  }[usedFor] ?? `${BASE_URL}/requests`
+  const URL =
+    {
+      allRequests: `${BASE_URL}/requests`,
+      userRequests: `${BASE_URL}/requests?user=${id}`,
+      replies: `${BASE_URL}/requests/${id}`
+    }[usedFor] ?? `${BASE_URL}/requests`
+
   const fetchAsks = async () => {
     setLoading(true)
     try {

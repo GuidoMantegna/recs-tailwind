@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
 import { AuthContext, Login } from 'context'
+import { useFetch } from 'customHooks'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import axios from 'axios'
 import { MdDarkMode, MdLightMode } from 'react-icons/md'
 
 interface toggleBTNProps {
@@ -19,14 +19,15 @@ const ToggleBTN: React.FC<toggleBTNProps> = ({ toggleTheme, theme }) => (
 const Header = () => {
   const user = useContext(AuthContext)
   const login = useContext(Login)
+  const { fetchData } = useFetch()
   const [theme, setTheme] = useState('light')
-  const loginLogout = async () => {
-    if (user) {
-      axios.get('http://localhost:1234/api/v1/users/logout')
+
+  const logout = () =>
+    fetchData('users/logout', 'get').then(() => {
       login(null)
       toast.info('Logout successful')
-    }
-  }
+    })
+
   const toggleTheme = () => {
     const theme = localStorage.getItem('theme')
     if (!theme) return localStorage.setItem('theme', 'dark')
@@ -55,11 +56,10 @@ const Header = () => {
             <Link
               to="login"
               className="text-lg custom-link"
-              onClick={loginLogout}
+              onClick={() => logout()}
             >
               Logout
             </Link>
-            <ToggleBTN toggleTheme={toggleTheme} theme={theme} />
           </>
         ) : (
           <>
@@ -69,9 +69,9 @@ const Header = () => {
             <Link to="signup" className="text-lg custom-link">
               Sign up
             </Link>
-            <ToggleBTN toggleTheme={toggleTheme} theme={theme} />
           </>
         )}
+        <ToggleBTN toggleTheme={toggleTheme} theme={theme} />
       </div>
     </header>
   )

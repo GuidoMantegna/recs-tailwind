@@ -52,7 +52,7 @@ const Reply: React.FC<ReplyProps> = ({
       <div className="flex justify-end items-center gap-2 text-sm pr-4">
         <button
           className="flex gap-1"
-          onClick={() => handleLike(_id)}
+          onClick={handleLike ? () => handleLike(_id) : undefined}
           disabled={['/favs', '/replies'].includes(pathname)}
         >
           {likes.length && likes.some((like) => like._id === loggedUserId) ? (

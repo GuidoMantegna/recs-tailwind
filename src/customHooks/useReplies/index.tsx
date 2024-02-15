@@ -17,7 +17,11 @@ const useReplies = (userId: string | undefined, usedFor: string) => {
     try {
       const {
         data: { data }
-      } = await axios.get(`${BASE_URL}/replies?user=${usedFor === "/replies" ? userId : ''}&likedBy=${usedFor === "/favs" ? userId : ''}`)
+      } = await axios.get(
+        `${BASE_URL}/replies?user=${
+          usedFor === '/replies' ? userId : ''
+        }&likedBy=${usedFor === '/favs' ? userId : ''}`
+      )
       setReplies(data.replies)
       setLoading(false)
     } catch (error: any) {

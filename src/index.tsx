@@ -1,10 +1,11 @@
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import 'tailwindcss/tailwind.css'
 import 'styles.css'
-import App from 'components/App'
+import { Provider } from 'context'
+// Routes
 import Layout from 'routes/Layout'
-import React from 'react'
 import Landing from 'routes/Landing'
 import Login from 'routes/Login'
 import Home from 'routes/Home'
@@ -12,9 +13,7 @@ import Request from 'routes/Request'
 import MyRequest from 'routes/MyRequests'
 import Profile from 'routes/Profile'
 import Favs from 'routes/Favs'
-import ErrorPage from 'errorPage'
-import Error from 'components/Error'
-import { Provider } from 'context'
+import ErrorPage from 'routes/errorPage'
 
 const router = createBrowserRouter([
   {
@@ -24,41 +23,41 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'login',
-        element: <Login />,
+        element: <Login />
       },
       {
         path: 'signup',
-        element: <Login />,
+        element: <Login />
       },
       {
         path: '/',
-        element: <Home />,
+        element: <Home />
       },
       {
         path: 'profile',
-        element: <Profile />,
+        element: <Profile />
       },
       {
         path: 'requests/:id',
-        element: <Request />,
+        element: <Request />
       },
       {
         path: 'requests',
-        element: <MyRequest />,
+        element: <MyRequest />
       },
       {
         path: 'replies',
-        element: <Favs />,
+        element: <Favs />
       },
       {
         path: 'favs',
-        element: <Favs />,
+        element: <Favs />
       }
-    ],
+    ]
   },
   {
     path: '/landing',
-    element: <Landing />,
+    element: <Landing />
   }
 ])
 

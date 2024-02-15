@@ -28,6 +28,9 @@ const AskForm: React.FC<AskFormProps> = ({
         <label htmlFor="" className="flex items-center justify-center gap-4">
           <img
             src={`${STATIC_BASE_URL}/img/users/user-${userID}.jpeg`}
+            onError={(e) =>
+              e.currentTarget.setAttribute('src', '/img/users/default.webp')
+            }
             alt="user photo"
             className="rounded-full w-12 mb-2"
           />

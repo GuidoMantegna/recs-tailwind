@@ -44,12 +44,7 @@ const Home: React.FC = () => {
       )}
 
       <div className="w-full">
-        {loadingData && (
-          <>
-            <AskSkeleton height="h-20" />
-            {asks?.map((ask) => <Ask key={ask._id} {...ask} />)}
-          </>
-        )}
+        {loadingData && <AskSkeleton height="h-20" />}
         {asks?.map((ask) => <Ask key={ask._id} {...ask} />)}
       </div>
     </>

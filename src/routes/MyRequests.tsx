@@ -17,9 +17,12 @@ const MyRequest: React.FC = () => {
   if (loading) return <Loading />
   return (
     <div>
-      <div className='flex items-center gap-3 mb-4'>
+      <div className="flex items-center gap-3 mb-4">
         <img
-          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}	
+          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}
+          onError={(e) =>
+            e.currentTarget.setAttribute('src', '/img/users/default.webp')
+          }
           alt="user photo"
           className="rounded-full w-12"
         />

@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const pics2 = [
-  7, 2, 5
-]
+const pics2 = [7, 2, 5]
 const Landing = () => {
   return (
     <div className="flex flex-col items-center h-full  gap-20">

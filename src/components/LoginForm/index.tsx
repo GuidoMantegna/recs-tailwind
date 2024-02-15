@@ -15,7 +15,11 @@ type LoginFormProps = {
   btnLoading?: boolean
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor, btnLoading }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+  handleSubmit,
+  usedFor,
+  btnLoading
+}) => {
   const user = useContext(AuthContext)
   const [form, setForm] = useState<User>({
     email: '',
@@ -61,7 +65,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor, btnLoading
   }
 
   return (
-    <form className="w-full" encType="multipart/form-data" onSubmit={(e) => handleSubmit(e, form)}>
+    <form
+      className="w-full"
+      encType="multipart/form-data"
+      onSubmit={(e) => handleSubmit(e, form)}
+    >
       {usedFor !== '/login' && (
         <FormField
           name="name"
@@ -110,8 +118,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleSubmit, usedFor, btnLoading
           label="Photo 📷"
           onChange={handleFormChange}
           type="file"
-          // value=''//{form.photo}
-          // disabled={usedFor === '/profile'}
         />
       )}
       {usedFor !== '/profile' && (

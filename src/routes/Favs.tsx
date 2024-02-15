@@ -11,21 +11,8 @@ import { STATIC_BASE_URL } from 'utils/constants'
 const Favs: React.FC = () => {
   const user = useContext(AuthContext)
   const { pathname } = useLocation()
-  const { replies, setReplies, loading, error } = useReplies(user?._id, pathname)
-  // console.log(pathname.charAt(1).replace('/', ''))
+  const { replies, loading, error } = useReplies(user?._id, pathname)
 
-  const handleLike = async (replyID: string) => {
-    // fetchData(`replies/${replyID}`, 'patch', { userID: user?._id }).then(
-    //   (data) => {
-    //     const newAsks = asks ? [...asks] : []
-    //     const replyIndex = newAsks[0].replies.findIndex(
-    //       (reply) => reply._id === replyID
-    //     )
-    //     newAsks[0].replies[replyIndex] = data?.reply
-    //     setAsks(newAsks)
-    //   }
-    // )
-  }
   if (loading) return <Loading />
   if (error) return <Error />
   return (
@@ -33,6 +20,7 @@ const Favs: React.FC = () => {
       <div className='flex items-center gap-3 mb-4'>
         <img
           src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}	
+          onError={(e) => e.currentTarget.setAttribute('src', '/img/users/default.webp')}
           alt="user photo"
           className="rounded-full w-12"
         />
@@ -44,7 +32,7 @@ const Favs: React.FC = () => {
             {...reply}
             loggedUserId={user?._id}
             key={reply._id}
-            handleLike={handleLike}
+            handleLike={() => {}}
           />
         ))}
     </div>

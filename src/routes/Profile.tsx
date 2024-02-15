@@ -35,13 +35,12 @@ const Profile: React.FC = () => {
     })
   }
 
-  // if (loadingData) return <Loading />
   if (errorData) return <Error />
   return (
     <div className='w-3/4 m-auto'>
       <div className='flex items-center justify-center gap-3 mb-6'>
         <img
-          src={user ? `${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg` : undefined}	
+          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}	
           onError={(e) => e.currentTarget.setAttribute('src', '/img/users/default.webp')}
           alt="user photo"
           className="rounded-full w-20 border p-1"

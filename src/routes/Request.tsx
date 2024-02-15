@@ -70,6 +70,7 @@ const Request: React.FC = () => {
             <div className="flex items-center gap-2">
               <img
                 src={`${STATIC_BASE_URL}/img/users/user-${asks[0].user._id}.jpeg`}
+                onError={(e) => e.currentTarget.setAttribute('src', '/img/users/default.webp')}
                 alt="user photo"
                 className="rounded-full w-10"
               />

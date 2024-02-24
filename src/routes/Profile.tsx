@@ -27,7 +27,7 @@ const Profile: React.FC = () => {
     const userData = form.photo ? formData : form
 
     fetchData(`users/${user?._id}`, 'patch', userData).then((data) => {
-      login(data.user)
+      login({...data.data.user, token: data.token})
       toast.success('Data updated successfully')
       form.photo && window.location.reload()
     })

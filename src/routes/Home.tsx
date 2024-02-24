@@ -19,7 +19,7 @@ const Home: React.FC = () => {
         data &&
         // set asks with current user data beacuse the user is not fetched from the server completely
         setAsks([
-          { ...data.request, user: { _id: user?._id, name: user?.name } },
+          { ...data.data.request, user: { _id: user?._id, name: user?.name } },
           ...asks
         ])
     )

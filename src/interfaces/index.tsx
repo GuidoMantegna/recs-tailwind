@@ -56,4 +56,5 @@ export type User = {
   role?: string
   password: string
   confirmPassword: string
+  token?: string
 }

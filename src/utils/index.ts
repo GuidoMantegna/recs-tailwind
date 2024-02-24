@@ -28,7 +28,7 @@ export const handleLike = async (
       const replyIndex = newAsks[0].replies.findIndex(
         (reply) => reply._id === replyID
       )
-      newAsks[0].replies[replyIndex] = data?.reply
+      newAsks[0].replies[replyIndex] = data?.data.reply
       setAsks(newAsks)
     }
   )

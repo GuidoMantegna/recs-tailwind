@@ -34,7 +34,7 @@ const Request: React.FC = () => {
       (data) => {
         const newAsks = asks ? [...asks] : []
         newAsks[0].replies.unshift({
-          ...data?.reply,
+          ...data?.data.reply,
           user: { _id: user?._id, name: user?.name }
         })
         setAsks(newAsks)
@@ -49,7 +49,7 @@ const Request: React.FC = () => {
         const replyIndex = newAsks[0].replies.findIndex(
           (reply) => reply._id === replyID
         )
-        newAsks[0].replies[replyIndex] = data?.reply
+        newAsks[0].replies[replyIndex] = data?.data.reply
         setAsks(newAsks)
       }
     )

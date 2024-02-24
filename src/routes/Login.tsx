@@ -18,7 +18,7 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>, form: User) => {
     e.preventDefault()
     fetchData(`users${pathname}`, 'post', form).then((data) => {
-      login(data.user)
+      login({...data.data.user, token: data.token})
       toast.success('Login successful')
       navigate('/')
     })

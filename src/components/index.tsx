@@ -10,8 +10,12 @@ import Modal from './Modal'
 import Navbar from './Navbar'
 import Reply from './Reply'
 import ReplyForm from './ReplyForm'
+import Avatar from './Avatar'
+import AvatarPicker from './AvatarPicker'
 
 export {
+  Avatar,
+  AvatarPicker,
   Ask,
   AskForm,
   AskSkeleton,

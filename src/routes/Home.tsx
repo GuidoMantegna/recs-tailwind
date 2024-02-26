@@ -32,7 +32,6 @@ const Home: React.FC = () => {
       {user ? (
         <AskForm
           makeRequest={makeRequest}
-          userID={user?._id}
           btnLoading={loadingData}
         />
       ) : (

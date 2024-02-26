@@ -4,13 +4,14 @@ export interface AskProps {
   user: {
     _id: string
     name: string
+    photo: string
   }
   replies: [
     {
       _id: string
       reply: string
       videoURL: string
-      user: { _id: string; name: string }
+      user: { _id: string; name: string, photo: string }
       request: string
       likes: [{ _id: string; name: string }]
       numLikes: number
@@ -31,13 +32,13 @@ export interface AskProps {
 export type ReplyProps = {
   _id: string
   reply: string
-  createdAt: string,
+  createdAt: string
   videoURL: string
   likes: [{ _id: string; name: string }]
-  user: { _id: string; name: string }
+  user: { _id: string; name: string; photo: string }
   request: string
-  availableOn: string,
-  numLikes: number,
+  availableOn: string
+  numLikes: number
   loggedUserId: string | undefined // tells us if the user has liked the reply or not (Not in the API)
   handleLike?: (replyID: string) => void
 }

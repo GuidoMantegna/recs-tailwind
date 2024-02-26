@@ -11,7 +11,7 @@ import {
   Error,
   Reply,
   AskSkeleton,
-  AskForm
+  Avatar
 } from 'components'
 // Custom hooks / Utils
 import { useAsks, useFetch } from 'customHooks'
@@ -70,14 +70,16 @@ const Request: React.FC = () => {
           {/* REQUEST */}
           <div className="w-full mb-6">
             <div className="flex items-center gap-2">
-              <img
+              {/* USED FOR STATIC IMGS UPLOADED WITH MULTER */}
+              {/* <img
                 src={`${STATIC_BASE_URL}/img/users/user-${asks[0].user._id}.jpeg`}
                 onError={(e) =>
                   e.currentTarget.setAttribute('src', '/img/users/default.webp')
                 }
                 alt="user photo"
                 className="rounded-full w-10"
-              />
+              /> */}
+              <Avatar classes="w-10" userPhoto={asks[0].user.photo} />
               <p className="">{asks[0].user.name}</p>
               <span className="font-extralight text-sm">
                 {getFormattedDate(asks[0].createdAt)}

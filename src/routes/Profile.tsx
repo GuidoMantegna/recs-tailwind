@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import { useLogin } from 'context'
 import { AuthContext } from 'context'
 // Components
-import { LoginForm, Error } from 'components'
+import { LoginForm, Error, Avatar } from 'components'
 // Custom hooks / Utils
 import { useFetch } from 'customHooks'
 import { User } from 'interfaces'
@@ -27,18 +27,20 @@ const Profile: React.FC = () => {
     const userData = form.photo ? formData : form
 
     fetchData(`users/${user?._id}`, 'patch', userData).then((data) => {
-      login({...data.data.user, token: data.token})
+      login({ ...data.data.user, token: data.token })
       toast.success('Data updated successfully')
-      form.photo && window.location.reload()
+      // USED FOR STATIC IMGS UPLOADED WITH MULTER
+      // form.photo && window.location.reload()
     })
   }
 
   if (errorData) return <Error />
   return (
     <div className="w-3/4 m-auto">
-      <div className="flex items-center justify-center gap-3 mb-6">
+      {/* USED FOR STATIC IMGS UPLOADED WITH MULTER */}
+      {/* <div className="flex items-center justify-center gap-3 mb-6">
         <img
-          src={`${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg`}
+          src={user?.photo.includes('user-') ? `${STATIC_BASE_URL}/img/users/user-${user?._id}.jpeg` : user?.photo}
           onError={(e) =>
             e.currentTarget.setAttribute('src', '/img/users/default.webp')
           }
@@ -46,7 +48,7 @@ const Profile: React.FC = () => {
           className="rounded-full w-20 border p-1"
         />
         <p className="text-lg font-semibold">Welcome {user?.name}!</p>
-      </div>
+      </div> */}
       <LoginForm
         handleSubmit={handleSubmit}
         usedFor={pathname}

@@ -7,7 +7,7 @@ import { User } from 'interfaces'
 import { useContext } from 'react'
 import { AuthContext } from 'context'
 // Components
-import { FormField } from 'components'
+import { FormField, AvatarPicker } from 'components'
 
 type LoginFormProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, form: User) => void
@@ -65,103 +65,114 @@ const LoginForm: React.FC<LoginFormProps> = ({
   }
 
   return (
-    <form
-      className="w-full"
-      encType="multipart/form-data"
-      onSubmit={(e) => handleSubmit(e, form)}
-    >
-      {usedFor !== '/login' && (
+    <>
+      {usedFor === '/profile' && (
+        <AvatarPicker
+          setForm={setForm}
+          form={form}
+          user={user}
+          handleSubmit={handleSubmit}
+        />
+      )}
+      <form
+        className="w-full"
+        encType="multipart/form-data"
+        onSubmit={(e) => handleSubmit(e, form)}
+      >
+        {usedFor !== '/login' && (
+          <FormField
+            name="name"
+            label="Name 💬"
+            onChange={handleFormChange}
+            type="text"
+            value={form.name}
+            disabled={usedFor === '/profile' && isDisabled.name}
+          >
+            {usedFor === '/profile' && (
+              <>
+                <button
+                  className=" absolute top-2 right-2"
+                  onClick={() => handleDisabled('name')}
+                  type="button"
+                >
+                  {isDisabled.name ? <MdEdit /> : <RxCross2 />}
+                </button>
+              </>
+            )}
+          </FormField>
+        )}
         <FormField
-          name="name"
-          label="Name 💬"
+          name="email"
+          label="Email 📧"
           onChange={handleFormChange}
-          type="text"
-          value={form.name}
-          disabled={usedFor === '/profile' && isDisabled.name}
+          type="email"
+          value={form.email}
+          disabled={usedFor === '/profile' && isDisabled.email}
         >
           {usedFor === '/profile' && (
             <>
               <button
                 className=" absolute top-2 right-2"
-                onClick={() => handleDisabled('name')}
+                onClick={() => handleDisabled('email')}
                 type="button"
               >
-                {isDisabled.name ? <MdEdit /> : <RxCross2 />}
+                {isDisabled.email ? <MdEdit /> : <RxCross2 />}
               </button>
             </>
           )}
         </FormField>
-      )}
-      <FormField
-        name="email"
-        label="Email 📧"
-        onChange={handleFormChange}
-        type="email"
-        value={form.email}
-        disabled={usedFor === '/profile' && isDisabled.email}
-      >
-        {usedFor === '/profile' && (
-          <>
-            <button
-              className=" absolute top-2 right-2"
-              onClick={() => handleDisabled('email')}
-              type="button"
-            >
-              {isDisabled.email ? <MdEdit /> : <RxCross2 />}
-            </button>
-          </>
-        )}
-      </FormField>
-      {usedFor === '/profile' && (
-        <FormField
-          name="photo"
-          label="Photo 📷"
-          onChange={handleFormChange}
-          type="file"
-        />
-      )}
-      {usedFor !== '/profile' && (
-        <>
-          <FormField
-            name="password"
-            label={`Password ${passwordIcon()}`}
-            onChange={handleFormChange}
-            type={showPassword ? 'text' : 'password'}
-            value={form.password}
-          >
-            <button
-              className=" absolute top-2 right-2"
-              onClick={() => toggle(!showPassword)}
-              type="button"
-            >
-              {showPassword ? <BiShowAlt /> : <BiHide />}
-            </button>
-          </FormField>
-          {usedFor === '/signup' && (
+        {/* USED FOR STATIC IMGS UPLOADED WITH MULTER */}
+        {/* {usedFor === '/profile' && (
             <FormField
-              name="confirmPassword"
-              label="Confirm password"
+              name="photo"
+              label="Photo 📷"
+              onChange={handleFormChange}
+              type="file"
+            />
+        )} */}
+        {usedFor !== '/profile' && (
+          <>
+            <FormField
+              name="password"
+              label={`Password ${passwordIcon()}`}
               onChange={handleFormChange}
               type={showPassword ? 'text' : 'password'}
-              value={form.confirmPassword}
-            />
-          )}
-        </>
-      )}
-      <button
-        className={`custom-btn w-full mt-5 mb-10 ${
-          btnLoading && 'animate-pulse'
-        }`}
-        type="submit"
-        disabled={btnLoading}
-      >
-        {
-          { '/login': 'Login', '/signup': 'Sign up', '/profile': 'Update' }[
-            usedFor
-          ]
-        }
-      </button>
-    </form>
+              value={form.password}
+            >
+              <button
+                className=" absolute top-2 right-2"
+                onClick={() => toggle(!showPassword)}
+                type="button"
+              >
+                {showPassword ? <BiShowAlt /> : <BiHide />}
+              </button>
+            </FormField>
+            {usedFor === '/signup' && (
+              <FormField
+                name="confirmPassword"
+                label="Confirm password"
+                onChange={handleFormChange}
+                type={showPassword ? 'text' : 'password'}
+                value={form.confirmPassword}
+              />
+            )}
+          </>
+        )}
+        <button
+          className={`custom-btn w-full mt-5 mb-10 ${
+            btnLoading && 'animate-pulse'
+          }`}
+          type="submit"
+          disabled={btnLoading}
+        >
+          {
+            { '/login': 'Login', '/signup': 'Sign up', '/profile': 'Update' }[
+              usedFor
+            ]
+          }
+        </button>
+      </form>
+    </>
   )
 }
 

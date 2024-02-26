@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { STATIC_BASE_URL } from 'utils/constants'
+import { Avatar } from 'components'
 
 interface AskFormProps {
   makeRequest: (ask: string) => void
-  userID: string | undefined
+  // userID: string | undefined
   btnLoading?: boolean
 }
 
 const AskForm: React.FC<AskFormProps> = ({
   makeRequest,
-  userID,
+  // userID,
   btnLoading
 }) => {
   const [ask, setAsk] = useState('')
@@ -26,14 +26,7 @@ const AskForm: React.FC<AskFormProps> = ({
     <form onSubmit={handleSubmit} className="w-full mb-20">
       <div id="form-field" className="flex flex-col mb-6">
         <label htmlFor="" className="flex items-center justify-center gap-4">
-          <img
-            src={`${STATIC_BASE_URL}/img/users/user-${userID}.jpeg`}
-            onError={(e) =>
-              e.currentTarget.setAttribute('src', '/img/users/default.webp')
-            }
-            alt="user photo"
-            className="rounded-full w-12 mb-2"
-          />
+          < Avatar classes='w-12 mb-2'/>
           <h3 className=" text-lg">What mood are you in?</h3>
         </label>
         <textarea

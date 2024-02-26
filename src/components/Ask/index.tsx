@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 import { AskProps } from 'interfaces'
-import { STATIC_BASE_URL } from '../../utils/constants'
 import { getFormattedDate } from 'utils'
 import { GoCommentDiscussion } from 'react-icons/go'
+import { Avatar } from 'components'
 
 const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
   const { pathname } = useLocation()
@@ -11,14 +11,16 @@ const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
     <div className="w-full my-8">
       {pathname !== '/requests' && (
         <div className="flex items-center gap-2">
-          <img
+          {/* USED FOR STATIC IMGS UPLOADED WITH MULTER */}
+          {/* <img
             src={`${STATIC_BASE_URL}/img/users/user-${user._id}.jpeg`}
             onError={(e) =>
               e.currentTarget.setAttribute('src', '/img/users/default.webp')
             }
             alt="user photo"
             className="rounded-full w-10"
-          />
+          /> */}
+          <Avatar classes="w-10" userPhoto={user.photo}/>
           <p className="">{user.name}</p>
           <span className="font-extralight text-sm">
             {getFormattedDate(createdAt)}

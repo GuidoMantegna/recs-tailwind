@@ -4,7 +4,13 @@ import { getFormattedDate } from 'utils'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { Avatar } from 'components'
 
-const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
+export const Ask: React.FC<AskProps> = ({
+  _id,
+  user,
+  brief,
+  replies,
+  createdAt
+}) => {
   const { pathname } = useLocation()
 
   return (
@@ -20,7 +26,7 @@ const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
             alt="user photo"
             className="rounded-full w-10"
           /> */}
-          <Avatar classes="w-10" userPhoto={user.photo}/>
+          <Avatar classes="w-10" userPhoto={user.photo} />
           <p className="">{user.name}</p>
           <span className="font-extralight text-sm">
             {getFormattedDate(createdAt)}
@@ -40,5 +46,3 @@ const Ask: React.FC<AskProps> = ({ _id, user, brief, replies, createdAt }) => {
     </div>
   )
 }
-
-export default Ask

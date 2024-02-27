@@ -6,7 +6,10 @@ interface ReplyFormProps {
   closeModal: () => void
 }
 
-const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
+export const ReplyForm: React.FC<ReplyFormProps> = ({
+  onSubmit,
+  closeModal
+}) => {
   const [reply, setReply] = useState<ReplyFormState>({
     reply: '',
     videoURL: '',
@@ -62,5 +65,3 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ onSubmit, closeModal }) => {
     </form>
   )
 }
-
-export default ReplyForm

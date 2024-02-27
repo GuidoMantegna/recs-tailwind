@@ -1,31 +1,14 @@
-import Ask from './Ask'
-import AskForm from './AskForm'
-import AskSkeleton from './AskSkeleton'
-import Error from './Error'
-import FormField from './FormField'
-import Header from './Header'
-import Loading from './Loading'
-import LoginForm from './LoginForm'
-import Modal from './Modal'
-import Navbar from './Navbar'
-import Reply from './Reply'
-import ReplyForm from './ReplyForm'
-import Avatar from './Avatar'
-import AvatarPicker from './AvatarPicker'
-
-export {
-  Avatar,
-  AvatarPicker,
-  Ask,
-  AskForm,
-  AskSkeleton,
-  Error,
-  FormField,
-  Header,
-  Loading,
-  LoginForm,
-  Modal,
-  Navbar,
-  Reply,
-  ReplyForm
-}
+export * from './Ask'
+export * from './AskForm'
+export * from './AskSkeleton'
+export * from './Avatar'
+export * from './AvatarPicker'
+export * from './Error'
+export * from './FormField'
+export * from './Header'
+export * from './Loading'
+export * from './LoginForm'
+export * from './Modal'
+export * from './Navbar'
+export * from './Reply'
+export * from './ReplyForm'

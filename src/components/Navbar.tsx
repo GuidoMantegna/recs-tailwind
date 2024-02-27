@@ -3,7 +3,7 @@ import { GoCommentDiscussion } from 'react-icons/go'
 import { AiOutlineQuestion } from 'react-icons/ai'
 import { MdFavoriteBorder } from 'react-icons/md'
 
-const Navbar: React.FC = () => {
+export const Navbar: React.FC = () => {
   const { pathname } = useLocation()
   return (
     <nav className="sticky bottom-0 w-full bg-white dark:bg-slate-900 border-t border-gray-300 dark:border-green-900 p-4 flex items-center justify-around">
@@ -36,5 +36,3 @@ const Navbar: React.FC = () => {
     </nav>
   )
 }
-
-export default Navbar

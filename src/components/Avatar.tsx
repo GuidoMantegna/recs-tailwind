@@ -6,7 +6,7 @@ interface AvatarProps {
   userPhoto?: string
 }
 
-const Avatar: React.FC<AvatarProps> = ({ classes, userPhoto }) => {
+export const Avatar: React.FC<AvatarProps> = ({ classes, userPhoto }) => {
   const user = useContext(AuthContext)
   const src = () => {
     if (userPhoto) return userPhoto.split('-')[1]
@@ -25,5 +25,3 @@ const Avatar: React.FC<AvatarProps> = ({ classes, userPhoto }) => {
     />
   )
 }
-
-export default Avatar

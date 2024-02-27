@@ -1,4 +1,3 @@
-import useAsks from "./useAsks";
-import useFetch from "./useFetch";
-
-export { useAsks, useFetch };
+export * from "./useAsks";
+export * from "./useFetch";
+export * from "./useReplies";

@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 // Allow cookies to be received from the server and seted in the browser
 axios.defaults.withCredentials = true
 
-const useFetch = () => {
+export const useFetch = () => {
   const [loadingData, setLoading] = useState(false)
   const [errorData, setError] = useState(false)
   const user = useContext(AuthContext)
@@ -19,7 +19,7 @@ const useFetch = () => {
       const data = await axios({
         method,
         url: `${BASE_URL}/${url}`,
-        headers: { 'Authorization': `Bearer ${user?.token}` },
+        headers: { Authorization: `Bearer ${user?.token}` },
         data: payload
       })
       setLoading(false)
@@ -37,5 +37,3 @@ const useFetch = () => {
     fetchData
   }
 }
-
-export default useFetch

@@ -1,11 +1,11 @@
-import { STATIC_BASE_URL } from '../../utils/constants'
+import { STATIC_BASE_URL } from '../utils/constants'
 import { useLocation } from 'react-router-dom'
 import { getFormattedDate } from 'utils'
 import { GoHeart, GoHeartFill } from 'react-icons/go'
 import { ReplyProps } from 'interfaces'
 import { Avatar } from 'components'
 
-const Reply: React.FC<ReplyProps> = ({
+export const Reply: React.FC<ReplyProps> = ({
   _id,
   user,
   videoURL,
@@ -69,5 +69,3 @@ const Reply: React.FC<ReplyProps> = ({
     </div>
   )
 }
-
-export default Reply

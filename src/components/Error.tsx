@@ -1,4 +1,4 @@
-const Error: React.FC = () => {
+export const Error: React.FC = () => {
   return (
     <div className="flex flex-col justify-center gap-5">
       <h2 className="text-lg font-semibold">
@@ -10,5 +10,3 @@ const Error: React.FC = () => {
     </div>
   )
 }
-
-export default Error

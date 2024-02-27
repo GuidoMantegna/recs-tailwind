@@ -2,7 +2,7 @@ interface AskSkeletonProps {
   height: string
 }
 
-const AskSkeleton: React.FC<AskSkeletonProps> = ({ height }) => {
+export const AskSkeleton: React.FC<AskSkeletonProps> = ({ height }) => {
   return (
     <div role="status" className="animate-pulse">
       <div className="w-full my-8">
@@ -21,5 +21,3 @@ const AskSkeleton: React.FC<AskSkeletonProps> = ({ height }) => {
     </div>
   )
 }
-
-export default AskSkeleton

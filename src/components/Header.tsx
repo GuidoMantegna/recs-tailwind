@@ -16,7 +16,7 @@ const ToggleBTN: React.FC<toggleBTNProps> = ({ toggleTheme, theme }) => (
   </button>
 )
 
-const Header = () => {
+export const Header = () => {
   const user = useContext(AuthContext)
   const login = useContext(Login)
   const { fetchData } = useFetch()
@@ -76,5 +76,3 @@ const Header = () => {
     </header>
   )
 }
-
-export default Header

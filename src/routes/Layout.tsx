@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Outlet, Link, useLocation } from 'react-router-dom'
 import { AuthContext } from 'context'
 // Components
-import Header from 'components/Header'
-import Navbar from 'components/Navbar'
+import { Header, Navbar } from 'components'
 import { ToastContainer } from 'react-toastify'
 
 const Layout: React.FC = () => {

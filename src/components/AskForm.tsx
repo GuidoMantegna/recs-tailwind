@@ -7,7 +7,7 @@ interface AskFormProps {
   btnLoading?: boolean
 }
 
-const AskForm: React.FC<AskFormProps> = ({
+export const AskForm: React.FC<AskFormProps> = ({
   makeRequest,
   // userID,
   btnLoading
@@ -26,7 +26,7 @@ const AskForm: React.FC<AskFormProps> = ({
     <form onSubmit={handleSubmit} className="w-full mb-20">
       <div id="form-field" className="flex flex-col mb-6">
         <label htmlFor="" className="flex items-center justify-center gap-4">
-          < Avatar classes='w-12 mb-2'/>
+          <Avatar classes="w-12 mb-2" />
           <h3 className=" text-lg">What mood are you in?</h3>
         </label>
         <textarea
@@ -50,5 +50,3 @@ const AskForm: React.FC<AskFormProps> = ({
     </form>
   )
 }
-
-export default AskForm

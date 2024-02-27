@@ -8,7 +8,7 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose: () => void
 }
 
-const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
+export const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
   if (!isOpen) return null
 
   return ReactDOM.createPortal(
@@ -23,5 +23,3 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
     document.body
   )
 }
-
-export default Modal

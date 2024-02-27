@@ -8,7 +8,7 @@ interface FormFieldProps {
   value?: string | number | undefined
 }
 
-const FormField: React.FC<FormFieldProps> = ({
+export const FormField: React.FC<FormFieldProps> = ({
   children,
   disabled,
   label,
@@ -36,5 +36,3 @@ const FormField: React.FC<FormFieldProps> = ({
     </div>
   )
 }
-
-export default FormField

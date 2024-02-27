@@ -5,8 +5,7 @@ import { AuthContext } from 'context'
 // Components
 import { Loading, Reply, Error, Avatar } from 'components'
 // Custom hooks / Utils
-import useReplies from 'customHooks/useReplies'
-import { STATIC_BASE_URL } from 'utils/constants'
+import { useReplies } from 'customHooks'
 
 const Favs: React.FC = () => {
   const user = useContext(AuthContext)

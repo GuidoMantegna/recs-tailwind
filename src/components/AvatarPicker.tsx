@@ -10,7 +10,7 @@ type AvatarPickerProps = {
   form: User
 }
 
-const AvatarPicker: React.FC<AvatarPickerProps> = ({
+export const AvatarPicker: React.FC<AvatarPickerProps> = ({
   setForm,
   user,
   form,
@@ -108,5 +108,3 @@ const AvatarPicker: React.FC<AvatarPickerProps> = ({
     </>
   )
 }
-
-export default AvatarPicker

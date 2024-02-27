@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Loading: React.FC = () => {
+export const Loading: React.FC = () => {
   return ReactDOM.createPortal(
     <div className="flex justify-center items-center fixed w-full bg-neutral-700 bg-opacity-90 top-0 bottom-0">
       <div
@@ -16,5 +16,3 @@ const Loading: React.FC = () => {
     document.body
   )
 }
-
-export default Loading

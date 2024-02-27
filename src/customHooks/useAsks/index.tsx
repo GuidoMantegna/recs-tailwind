@@ -5,7 +5,7 @@ import { BASE_URL } from 'utils/constants'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const useAsks = (id: string | undefined, usedFor: string) => {
+export const useAsks = (id: string | undefined, usedFor: string) => {
   const [asks, setAsks] = useState<AskProps[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -44,5 +44,3 @@ const useAsks = (id: string | undefined, usedFor: string) => {
     setAsks
   }
 }
-
-export default useAsks

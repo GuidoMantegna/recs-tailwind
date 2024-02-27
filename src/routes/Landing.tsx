@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 const pics2 = [7, 2, 5]
 const Landing = () => {
   return (
-    <div className="flex flex-col items-center h-full  gap-20">
-      <h1 className=" text-center font-bold  text-4xl mt-14">🎥 RECS</h1>
+    <div className="flex flex-col items-center gap-20">
+      <h1 className=" text-center font-bold  text-4xl">🎥 RECS</h1>
       <div>
         <div className=" flex items-center  h-16 bg-gradient-to-r  from-indigo-600 to-orange-600  transform -skew-y-6 overflow-hidden">
           <div className="flex transform skew-y-6   h-32">
@@ -28,15 +28,8 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <Link to="/">
+      <Link to="/home">
         <button className="custom-btn btn-effect w-48">Check it out ⚡</button>
-      </Link>
-      <Link
-        to="https://guidomantegna.github.io/GuidoMantegna/"
-        target="blank"
-        className="text-sm text-center italic pb-2"
-      >
-        Developed by Guido Mantegna
       </Link>
     </div>
   )

@@ -37,7 +37,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
   useEffect(() => {
     if (usedFor === '/profile' && user) {
-      setForm({ ...user, photo: null })
+      setForm({ ...user })
+      // setForm({ ...user, photo: null }) USED FOR STATIC IMGS UPLOADED WITH MULTER
     }
   }, [])
 

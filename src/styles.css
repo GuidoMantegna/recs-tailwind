@@ -33,7 +33,7 @@ iframe {
   top: 0;
   z-index: -1;
   transform: skewX(-25deg) translateX(-200%);
-  transition: translateX .5s ease-in-out;
+  transition: transform .5s ease-in-out;
 }
 
 .custom-btn.btn-effect:hover::after {

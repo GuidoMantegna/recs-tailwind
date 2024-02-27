@@ -6,11 +6,10 @@ import { useContext } from 'react'
 import { useLogin } from 'context'
 import { AuthContext } from 'context'
 // Components
-import { LoginForm, Error, Avatar } from 'components'
+import { LoginForm, Error } from 'components'
 // Custom hooks / Utils
 import { useFetch } from 'customHooks'
 import { User } from 'interfaces'
-import { STATIC_BASE_URL } from 'utils/constants'
 
 const Profile: React.FC = () => {
   const user = useContext(AuthContext)

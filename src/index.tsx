@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         element: <Login />
       },
       {
-        path: '/',
+        path: '/home',
         element: <Home />
       },
       {
@@ -52,13 +52,13 @@ const router = createBrowserRouter([
       {
         path: 'favs',
         element: <Favs />
+      },
+      {
+        path: '/',
+        element: <Landing />
       }
     ]
   },
-  {
-    path: '/landing',
-    element: <Landing />
-  }
 ])
 
 const container = document.getElementById('root') as HTMLDivElement

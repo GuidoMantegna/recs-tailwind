@@ -13,20 +13,24 @@ const Login: React.FC = () => {
   const login = useLogin()
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { fetchData } = useFetch()
+  const { fetchData, loadingData } = useFetch()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>, form: User) => {
     e.preventDefault()
     fetchData(`users${pathname}`, 'post', form).then((data) => {
-      login({...data.data.user, token: data.token})
+      login({ ...data.data.user, token: data.token })
       toast.success('Login successful')
-      navigate('/')
+      navigate('/home')
     })
   }
 
   return (
     <div className="w-3/4 m-auto">
-      <LoginForm handleSubmit={handleSubmit} usedFor={pathname} />
+      <LoginForm
+        handleSubmit={handleSubmit}
+        usedFor={pathname}
+        btnLoading={loadingData}
+      />
     </div>
   )
 }

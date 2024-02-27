@@ -26,7 +26,7 @@ const Profile: React.FC = () => {
     const userData = form.photo ? formData : form
 
     fetchData(`users/${user?._id}`, 'patch', userData).then((data) => {
-      login({ ...data.data.user, token: data.token })
+      login({ ...user, ...data.data.user })
       toast.success('Data updated successfully')
       // USED FOR STATIC IMGS UPLOADED WITH MULTER
       // form.photo && window.location.reload()
